@@ -1,0 +1,247 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+\title{Methods 3 - Question Sheet 7}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\begin{question}(9 marks for * parts)\\
+Give the general solutions for the following linear partial differential equations and, in each case, find the particular solution satisfying $F(s,0)=s$.
+\begin{multicols}{2}
+\begin{enumerate}[(a)]
+\item $F_x-F_y=F$,
+\item * $2F_x+3F_y=x^2$,
+\item $F_x+5F_y=xy$,
+\item $xF_x+F_y=0$,
+\item * $yF_x+xF_y=F$,
+\item $e^yF_x-F_y=xF$.
+\end{enumerate}
+\end{multicols}
+\end{question}
+
+\begin{answer}
+\begin{enumerate}[(a)]
+\item In this case $F_x-F_y$ is the directional derivative of $F$ in the $v=\left(\begin{array}{c}1\\ -1\end{array}\right)$-direction. We therefore change coordinates to make $v$ into the $x'$-axis (we can choose the $y'$-axis arbitrarily) so let's use coordinates
+\[\left(\begin{array}{c}
+x\\ y
+\end{array}\right)=\left(\begin{array}{cc}1 & 0\\ -1 & 1\end{array}\right)\left(\begin{array}{c}x' \\ y'\end{array}\right),\]
+that is
+\[x=x',\qquad y=y'-x'\]
+or
+\[x'=x,\qquad y'=x+y.\]
+By the chain rule we have $\partial/\partial x'=F_x\partial x/\partial x'+F_y\partial y/\partial x'=F_x-F_y$. Therefore in our new coordinates the equation becomes $\partial F/\partial x'=F$, with solution $F(x',y')=C(y')e^{x'}$. Translating back to our original coordinates, $F(x,y)=C(x+y)e^x$.
+
+The particular solution satisfying $F(s,0)=s$ has $C(s)e^s=s$ so $C(s)=s/e^s$ and the solution is $e^{-y}(x+y)$.
+\item * In this case $2F_x+3F_y$ is the directional derivative in the $(2,3)$-direction so we use coordinates
+\[\left(\begin{array}{c}
+x\\ y
+\end{array}\right)=\left(\begin{array}{cc}2 & 0\\ 3 & 1\end{array}\right)\left(\begin{array}{c}x' \\ y'\end{array}\right),\]
+in which $\partial F/\partial x'=2F_x+3F_y$. Thus $x'=x/2$, $y'=y-3x/2$. Then $F_{x'}=x^2=4(x')^2$ so $F=4(x')^3/3+C(y')=x^3/6+C(y-3x/2)$ is the general solution.
+\mks{3}
+
+The particular solution with $F(s,0)=s$ has $s^3/6+C(-3s/2)=x$ so $C(-3s/2)=s-s^3/6$ or (setting $u=-3s/2$)
+\[C(u)=-\frac{2u}{3}+\frac{4u^3}{81}\]
+and $F(x,y)=x^3/6+\frac{4}{81}(y-3x/2)^3-\frac{2}{3}(y-3x/2)$.
+\mks{1}
+\item Using coordinates $x=x'$, $y=5x'+y'$ ($x'=x$, $y'=-5x+y$) we get the solution
+\[F(x',y')=y'(x')^2/2+5(x')^3/3+C(y')\]
+or
+\[F(x,y)=(-5x+y)x^2/2+5x^3/3+C(-5x+y).\]
+The particular solution with $F(s,0)=s$ has $C(-5s)=s+5s^3/6$, or if $w=-5s$
+\[C(w)=-w/5-w^3/150.\]
+\item Now we have varying coefficients: $xF_x+F_y=0$ and we have to integrate the characteristic vector field $\dot{x}=x$ and $\dot{y}=1$. This gives characteristic curves $x(t)=ae^t$, $y(t)=t+b$. Setting $b=0$ we get the coordinate change is $x=ae^t$, $y=t$, which gives $a=xe^{-y}$, $t=y$. The operator $\partial/\partial t$ becomes
+\[\frac{\partial x}{\partial t}\frac{\partial}{\partial x}+\frac{\partial y}{\partial t}\frac{\partial}{\partial y}=ae^t\partial_x+\partial_t=x\partial_x+\partial_y\]
+so the equation becomes
+\[\partial F/\partial t=0\]
+so the general solution is $F(a,t)=C(a)$ or $F(x,y)=C(xe^{-y})$. The particular solution with $F(s,0)=s$ has $C(se^0)=s$ so $C(s)=s$ and $F(x,y)=xe^{-y}$.
+\item * The characteristic equations are $\dot{x}=y$ and $\dot{y}=x$ so differentiating again with respect to $t$ we get $\ddot{x}=x$ and $\ddot{y}=y$. The first gives $x=Ae^t+Be^{-t}$ and then $y=\dot{x}=Ae^t t-Be^{-t}$.
+\mks{2}
+Let $A=1$ so that our coordinates are $B$ and $t$. In terms of $B$ and $t$ we have $\ln((x+y)/2)=t$ and $(x-y)(x+y)/4=B=(x^2-y^2)/4$.
+\mks{1}
+The equation becomes
+\[\partial F/\partial t=F\]
+so the general solution is $F=C(B)e^t$.
+\mks{1}
+In other words
+\[F(x,y)=C(x^2-y^2)(x+y)/2\]
+(note that the factor of $1/4$ in $B$ can be absorbed into the undetermined function $C$). Given that $F(x,0)=x$ we have $C(x^2)x/2=x$ so $C(x^2)=2$ or $C(w)=2$. So the particular solution is $(x+y)$.
+\mks{1}
+Note that although our new coordinate system was only valid in the region $x+y>0$, the solution we have found turns out to be defined everywhere.
+\item The characteristic equations are $\dot{x}=e^y$ and $\dot{y}=-1$ so the solutions are $y=-t+b$ and $x=-e^{-t}+a$. Thus (setting $b=0$) $a=x+e^{y}$. The equation becomes
+\[\partial F/\partial t=(a-e^{-t})F\]
+with solution
+\[\ln F=at+e^{-t}+C(a)\]
+Thus $F=\exp(C(x+e^{y})+e^y-(x+e^y)y)$. The particular solution with $F(s,0)=s$ has
+\[C(s+1)+1=\ln s\]
+so (setting $w=s+1$)
+\[C(w)=\ln(w-1)-1.\]
+\end{enumerate}
+\end{answer}
+\newpage
+
+\bigskip
+
+\begin{question}(9 marks for * parts)\\
+ For each of the following initial value problems:
+\begin{enumerate}[(i)]
+\item try to find the best collection of adjectives to describe the equation at hand (e.g. inhomogeneous linear, quasilinear, linear with constant coefficients,...);
+\item * write down the characteristic vector field in $\RR^3$ and find the characteristic curves passing through the initial condition;
+\item * give the solution to this initial value problem implicitly as a solution surface $(s,t)\mapsto (x(s,t),y(s,t),z(s,t))$;
+\item * find and sketch the caustic of the solution surface;
+\item using a computer, plot (1) the solution surface; (2) some of the projections to the $xy$-plane of the characteristic curves;
+\item * find a function whose graph is equal to the solution surface (remember to specify the domain on which this function is defined).
+\end{enumerate}
+
+\begin{multicols}{2}
+\begin{enumerate}[(a)]
+\item $FF_x-F_y=y$, $F(s,0)=s^2$.
+\item $F_x-F_y=1$, $F(s,s)=s$.
+\item * $(x+F)F_x+F_y=F$, $F(s,0)=s$.
+\item $xyF_x-F_y+F^2=0$, $F(s,0)=s$.
+\item * $xF_x-FF_y=1$, $F(s,0)=0$.
+\item $x^2F-F_x-xF_y=0$, $F(s,s)=s$.
+\end{enumerate}
+\end{multicols}
+
+\end{question}
+
+\begin{answer}
+\begin{enumerate}[(a)]
+\item This equation is quasilinear. The characteristic vector field is
+\[\dot{x}=z,\ \dot{y}=-1,\ \dot{z}=y.\]
+The characteristic curves therefore have $y=-t+b$ and so $z=-t^2/2+bt+a$ and $x=-t^3/6+bt^2/2+at+c$. The condition $F(s,0)=s^2$ means that at $t=0$, along $y=0$, if $x=s$ then $z=s^2$, which translates into
+\[b=0,\ c=s,\ a=s^2\]
+Therefore the solution surface can be parametrised as
+\[(s,t)\mapsto (-t^3/6+s^2t+s,-t,-t^2/2+s^2)\]
+We can find the caustic by calculating the determinant
+\[\det\left(\begin{array}{cc}\partial_sx & \partial_tx\\\partial_sy & \partial_ty\end{array}\right)=\det\left(\begin{array}{cc}2st+1 & -t^2/2+s^2\\ 0 & -1\end{array}\right)\]
+and setting it equal to zero, which gives
+\[2st=-1.\]
+Substituting back in, the caustic has $x=-t^3/6-1/4t$ and $y=-t$ as a parametric curve, or
+\[x=y^3/6+1/4y.\]
+Now $x=-s^2y+s+y^3/6$ so $s=\frac{1\pm\sqrt{1+2y^4/3-4xy}}{-2y}$ and $z=s^2-t^2/2$ so
+\[z=\left(\frac{1\pm\sqrt{1+2y^4/3-4xy}}{2y}\right)^2-y^2/2\]
+as a function of $x$ and $y$ (defined on $1+2y^4/3-4xy>0$, $y\neq 0$).
+\item This problem is inhomogeneous linear with constant coefficients. The characteristic vector field is
+\[\dot{x}=1,\ \dot{y}=-1,\ \dot{z}=1\]
+so the characteristic curves are $x=t+c$, $y=-t+a$ and $z=t+b$. $F(s,s)=s$ at $t=0$ gives $c=s$, $b=s$ and $a=s$. Therefore the solution surface is
+\[(s,t)\mapsto(t+s,s-t,t+s)\]
+The caustic is defined by the vanishing of
+\[\det\left(\begin{array}{cc}1 & 1\\ 1&-1\end{array}\right)=-2\]
+as a function of $s,t$, but $-2\neq 0$ so the caustic is empty. We can write $z=t+s=x$ so $F(x,y)=x$ is the solution we seek (defined globally).
+\item * This equation is quasilinear. The characteristic vector field is
+\[\dot{x}=x+z,\ \dot{y}=1,\ \dot{z}=z.\]
+This has integral curves $y=t+c$, $z=be^t$ and $x=(a+bt)e^t$. The initial condition $F(s,0)=s$ gives $c=0$, $b=s$ and $a=s$ along $t=0$. The parametrised solution surface is therefore
+\[(s,t)\mapsto (s(1+t)e^t,t,se^t)\]
+The caustic is the locus where
+\[\det\left(\begin{array}{cc}
+(1+t)e^t & s(2+t)e^{t}\\
+0 & 1
+\end{array}\right)=0\]
+that is
+\[(1+t)e^t=0\]
+i.e.
+\[t=-1\]
+The caustic is therefore the point $y=-1$, $x=0$ (just substituting $t=-1$ into the parametric surface). Note that $z=se^t=se^y$ and $s=xe^{-y}/(1+y)$ so
+\[F(x,y)=\frac{x}{1+y}\]
+is the solution (defined away from $y=-1$).
+\item This equation is quasilinear (not linear, because of the $F^2$ term). The characteristic vector field is
+\[\dot{x}=xy,\ \dot{y}=-1,\ \dot{z}=-z^2\]
+and integrating gives $y=-t+c$, $z=\frac{1}{t+b}$ and $x=ae^{(-t+c)^2/2}$. The initial condition $F(s,0)=s$ gives $c=0$, $s=\frac{1}{b}$ and $s=a$ along $t=0$. Therefore the solution surface is parametrised by
+\[(s,t)\mapsto \left(se^{-t^2/2},-t,\frac{1}{t+1/s}\right).\]
+This has caustic
+\[0=\det\left(\begin{array}{cc}
+e^{-t^2/2} & -ste^{-t^2/2}\\
+0 & -1
+\end{array}\right)=-e^{-t^2/2}\]
+Since this function is nowhere vanishing, the caustic is empty. We have $s=xe^{t^2/2}=xe^{y^2/2}$ and
+\[F(x,y)=z=\frac{1}{t+1/s}=\frac{1}{-y+x^{-1}e^{-y^2/2}}=\frac{x}{e^{-y^2/2}-xy}\]
+(defined on $xy\neq e^{-y^2/2}$). Note that this function is not globally defined even though there is no caustic - the solution surface has no vertical tangency: it goes to infinity too fast along $xy=e^{-y^2/2}$.
+\item * This equation is quasilinear. The characteristic vector field is
+\[\dot{x}=x,\ \dot{y}=-z,\ \dot{z}=1\]
+which has integral curves $z=t+c$, $x=ae^t$, $y=-t^2/2-ct+b$.
+\mks{1}
+The initial condition $F(s,0)=0$ gives $a=s$, $c=0$ and $b=0$ along $t=0$ so the solution surface is parametrised by
+\[(s,t)\mapsto (se^t,-t^2/2,t).\]
+\mks{1}
+This has caustic
+\[0=\det\left(\begin{array}{cc}
+e^t & se^t\\
+0 & -t
+\end{array}\right)=-te^t\]
+that is $t=0$.
+\mks{1}
+This corresponds to the line $y=0$. The solution satisfies
+\[F(x,y)=z=\pm\sqrt{-2y}.\]
+\mks{1}
+It is quite easy to visualise what is going on here: the solution is double-valued so there are two branches of the solution over $y<0$. These branches meet along the preimage of the caustic $y=0$, with a vertical tangency. The solution is defined on the set $\{y<0\}$.
+\item The equation is homogeneous linear but with varying coefficients. The characteristic vector field is
+\[\dot{x}=-1,\ \dot{y}=-x,\ \dot{z}=-x^2z\]
+which has solutions
+\[x=-t+a,\ y=t^2/2-at+b,\ z=ce^{-t^3/3-a^2t+at^2}.\]
+The initial condition $F(s,s)=s$ along $t=0$ gives
+\[a=s,\ b=s,\ c=s\]
+so the solution surface is
+\[(s,t)\mapsto (-t+s,t^2/2-st+s,se^{-t^3/3-s^2t+st^2}).\]
+This has caustic
+\[0=\det\left(\begin{array}{cc}
+1 & -1\\
+1-t & t-s
+\end{array}\right)=1-s\]
+so the caustic is $s=1$. This means $x=1-t$, $y=1-t+t^2/2$ so the caustic is the curve
+\[y=x+(x-1)^2/2=x^2/2+1/2\]
+We also have $x=s-t$ and $y=s-st+t^2/2=s-st+t^2/2+s^2/2-s^2/2=x^2/2+s-s^2/2$. Therefore
+\[s^2-2s+2y-x^2=0\]
+and
+\[s=\frac{2\pm 2\sqrt{1-2y+x^2}}{2}\]
+so
+\[t=s-x=1-x\pm \sqrt{1-2y+x^2}.\]
+Substituting this into $se^{-t^3/3-s^2t+st^2}$ gives $F$ as a function of $x$ and $y$ (will be a mess). This solution is defined on the set $1-2y+x^2>0$.
+\end{enumerate}
+\end{answer}
+
+\newpage
+
+\begin{question}(2 marks)\\
+In this question, we will prove that the Burgers equation
+\[\partial_tu+u\partial_xu=0\]
+is satisfied by the velocity field of a non-viscous fluid in one dimension.
+
+Suppose that the real line is filled with a fluid whose particles at point $x$ are moving with velocity $u(t,x)$ at time $t$. Suppose that the particles don't interact with one another or experience any external force (so by Newton's law, they have zero acceleration). Let $\gamma(t)$ be the path of one of the fluid particles so that $\dot{\gamma}(t)=u(t,\gamma(t))$. Given that $\gamma$ has no acceleration, deduce that $u$ satisfies the Burgers equation.
+\end{question}
+
+\begin{answer}
+If we differentiate $\dot{\gamma}(t)=u(t,\gamma(t))$ using the chain rule then we get
+\[\ddot{\gamma}(t)=\pd{u}{t}+\dot{\gamma}\pd{u}{x}\]
+so $\ddot{\gamma}=0$ gives the Burgers equation.
+\mks{2}
+\end{answer}
+\newpage
+
+\bigskip
+
+\begin{question}\ \\
+For some function $G(x,y)$, consider the linear PDE
+\[-y\partial_xF+x\partial_yF=G(x,y)\]
+with the initial condition $F(x,0)=0$ for $x>0$. Show that this initial-value problem has a single-valued solution on $\RR^2\setminus\{0\}$ if and only if $\int_0^{2\pi}G(A\cos\theta,A\sin\theta)d\theta=0$ for all $A$. For $G(x,y)=x$ find this solution explicitly.
+\end{question}
+
+\begin{answer}
+The characteristics are the integral curves $(x(t),y(t))$ of the vector field
+\[\dot{x}=-y,\qquad\dot{y}=x.\]
+Differentiating with respect to $t$ again gives $\ddot{x}=-x$ so $x=A\cos t+B\sin t$ and $y=-\dot{x}=A\sin t-B\cos t$. So the integral curves are circles centred at the origin. Imposing $F(x,0)=0$ at $t=0$ we see that $x(0)=A$, $y(0)=-B$ so $B=0$ and $(x,y)=(A\cos t,A\sin t)$. If $u(t)=F(A\cos t,A\sin t)$ then $\dot{u}=G(A\cos t,A\sin t)$ is the ODE to which the PDE reduces along the characteristics. In particular, since the half-line $\{(x,0)\ : x\in(0,\infty)\}$ is given in the coordinates $(A,t)$ by $t=0$, the solution is
+\[u(T)=\int_0^TG(A\cos t,A\sin t)dt\]
+This is single-valued if and only if $\int_0^{2\pi}G(A\cos t,A\sin t)dt=0$ for all $A$. In particular this condition is satisfied by $G(x,y)=x$. The solution is then
+\[u(T)=\int_0^TA\cos tdt=A\sin T\]
+or, in terms of $(x,y)$, $F(x,y)=y$. Indeed one can verify that
+\[\frac{\partial F}{\partial x}=0,\qquad\frac{\partial F}{\partial y}=1\]
+so
+\[-y\partial_xF+x\partial_yF=x\]
+as desired.
+\end{answer}
+
+\end{document}

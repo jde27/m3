@@ -1,0 +1,170 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+
+\title{Methods 3 - Question Sheet 6}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+In this sheet $\phi_x$ denotes $\pd{\phi}{x}$.
+
+\begin{question}(10 marks for * parts)\\
+Find the Euler-Lagrange equation for the following functionals (we have only written the Lagrangian in each case - if you need to, assume that the domain of integration is $(x,y)\in[0,1]^2$)
+\begin{enumerate}[(a)]
+\item * $\frac{1}{2}\left(\phi_x^2+\phi_y^2\right)+\frac{1}{2}K\phi^2$ (where $K$ is a constant),
+\item * $\phi^2\phi_x^2+\phi_y^2$,
+\item * $\phi_x\phi_y$ (in this case, also find the general solution to the Euler-Lagrange equation),
+\item $\frac{1}{2}\left(\phi_x^2+\phi_y^2\right)$ subject to the constraint $\int\phi^2 dxdy=K$.
+\item $\frac{1}{\phi_x}+\frac{1}{\phi_y}$.
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\begin{enumerate}[(a)]
+\item The Euler-Lagrange equation
+\[\pd{}{x}\pd{L}{\phi_x}+\pd{}{y}\pd{L}{\phi_y}=\pd{L}{\phi}\]
+becomes
+\[\pd{}{x}\pd{\phi}{x}+\pd{}{y}\pd{\phi}{y}=K\phi\]
+that is the Helmholtz equation $\Delta\phi=K\phi$.\mks{3}
+\item The Euler-Lagrange equation
+\[\pd{}{x}\pd{L}{\phi_x}+\pd{}{y}\pd{L}{\phi_y}=\pd{L}{\phi}\]
+becomes
+\[\pd{}{x}\left(2\phi^2\pd{\phi}{x}\right)+\pd{}{y}\left(2\pd{\phi}{y}\right)=2\phi\left(\pd{\phi}{x}\right)^2\]
+or
+\[4\phi\left(\pd{\phi}{x}\right)^2+2\phi^2\ppd{\phi}{x}+2\ppd{\phi}{y}=2\phi\left(\pd{\phi}{x}\right)^2.\]
+Simplifying gives\mks{3}
+\[0=\phi^2\ppd{\phi}{x}+\ppd{\phi}{y}+\phi\left(\pd{\phi}{x}\right)^2.\]
+\item The Euler-Lagrange equation
+\[\pd{}{x}\pd{L}{\phi_x}+\pd{}{y}\pd{L}{\phi_y}=\pd{L}{\phi}\]
+becomes
+\[\pd{}{x}\pd{\phi}{y}+\pd{}{y}\pd{\phi}{x}=0\]
+or
+\[\ppdd{\phi}{x}{y}=0.\]
+The general solution is $F(x)+G(y)$ for arbitrary functions $F$ and $G$.\mks{4}
+\item Modify the functional to
+\[\frac{1}{2}\left(\left(\pd{\phi}{x}\right)^2+\left(\pd{\phi}{y}\right)^2\right)-\lambda(\phi^2-K)\]
+the Euler-Lagrange equation
+\[\pd{}{x}\pd{L}{\phi_x}+\pd{}{y}\pd{L}{\phi_y}=\pd{L}{\phi}\]
+becomes
+\[\pd{}{x}\pd{\phi}{x}+\pd{}{y}\pd{\phi}{y}=-2\lambda\phi\]
+or $\Delta\phi=-2\lambda\phi$ (again this is Helmholtz's equation).
+\item The Euler-Lagrange equation
+\[\pd{}{x}\pd{L}{\phi_x}+\pd{}{y}\pd{L}{\phi_y}=\pd{L}{\phi}\]
+becomes
+\[\pd{}{x}\left(-\frac{1}{\phi_x^2}\right)+\pd{}{y}\left(-\frac{1}{\phi_y^2}\right)=0\]
+or
+\[\frac{2\phi_{xx}}{\phi_x^3}+\frac{2\phi_{yy}}{\phi_y^3}=0.\]
+Equivalently
+\[\phi_y^3\phi_{xx}+\phi_x^3\phi_{yy}=0.\]
+\end{enumerate}
+\end{answer}
+
+\bigskip
+
+\begin{question}\ \\
+A string has its endpoints fixed at $(0,0)$ and $(L,0)$. If its height at $x$ and time $t$ is $\phi(x,t)$ then (to a good approximation) its total kinetic energy is $E(\phi)=\frac{\rho}{2}\int_0^L\phi_t^2dx$ and its total potential energy (coming from stretching tension) is $T(\phi)=\frac{\tau}{2}\int_0^1\phi_x^2dx$. The string moves to minimise the integral
+\[\int_0^1(E(\phi)-T(\phi))dt.\]
+Show that the string obeys the {\em wave equation}
+\[\frac{1}{c^2}\frac{\partial^2\phi}{\partial t^2}=\frac{\partial^2\phi}{\partial x^2}\]
+where $c=\sqrt{\tau/\rho}$.
+\end{question}
+
+\begin{answer}
+The Euler-Lagrange equation for $\int_0^1\int_0^L(\frac{\rho}{2}(\partial_t\phi)^2-\frac{\tau}{2}(\partial_x\phi)^2)dxdt$ is
+\[\frac{\rho}{2}\frac{\partial}{\partial t}\partial_t\phi-\frac{\tau}{2}\frac{\partial}{\partial x}\partial_x\phi=0\]
+or
+\[\frac{\rho}{\tau}\partial_t^2\phi=\partial_x^2\phi\]
+which is the wave equation.
+\end{answer}
+
+\newpage
+
+\begin{question}(10 marks)\\
+\begin{enumerate}[(a)]
+\item Find the half-range sine series of the function
+\[F(x)=\begin{cases}
+x^2&\mbox{ if }x\in[0,1/2]\\
+(x-1)^2&\mbox{ if }x\in[1/2,1]
+\end{cases}\]
+
+\item Derive the Euler-Lagrange equation for the following functional
+\[\int_0^1\int_0^1\left(\left(\pd{\phi}{x}\right)^2+\left(\pd{\phi}{y}\right)^2\right)dxdy\]
+
+\item Solve this Euler-Lagrange equation given the boundary values
+
+\begin{center}
+\onelapl{\phi}{0}{0}{F(y)}{0}{}
+\end{center}
+where $F$ is defined in part (a) of the question.
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\begin{enumerate}
+\item[(a)] We need to calculate the $n$th Fourier coefficient $F_n=2\int_0^1F(x)\sin(n\pi x)dx$. We split the integral as
+\[2\int_0^{1/2}x^2\sin(n\pi x)dx+2\int_{1/2}^1(x-1)^2\sin(n\pi x)dx\]
+The first gives
+\begin{align*}
+\int_0^{1/2}x^2\sin(n\pi x)dx&=\left[-x^2\frac{\cos(n\pi x)}{n\pi}\right]_0^{1/2}+2\int_0^{1/2}x\frac{\cos(n\pi x)}{n\pi}dx\\
+                            &=\frac{-\cos(n\pi/2)}{4n\pi}+\frac{2}{n\pi}\left[x\frac{\sin(n\pi x)}{n\pi}\right]_0^{1/2}-\frac{2}{n\pi}\int_0^{1/2}\frac{\sin(n\pi x)}{n\pi}dx\\
+                            &=\frac{-\cos(n\pi/2)}{4n\pi}+\frac{\sin(n\pi/2)}{n^2\pi^2}+\frac{2}{n^3\pi^3}\left(\cos(n\pi/2)-1\right)
+\end{align*}
+the second gives
+\begin{align*}
+\int_{1/2}^1(x-1)^2\sin(n\pi x)dx&=\left[-(x-1)^2\frac{\cos(n\pi x)}{n\pi}\right]_{1/2}^1+2\int_{1/2}^1(x-1)\frac{\cos(n\pi x)}{n\pi}dx\\
+                            &=\frac{\cos(n\pi/2)}{4n\pi}+\frac{2}{n\pi}\left[(x-1)\frac{\sin(n\pi x)}{n\pi}\right]_{1/2}^1-\frac{2}{n\pi}\int_{1/2}^1\frac{\sin(n\pi x)}{n\pi}dx\\
+                            &=\frac{\cos(n\pi/2)}{4n\pi}+\frac{\sin(n\pi/2)}{n^2\pi^2}+\frac{2}{n^3\pi^3}\left((-1)^n-\cos(n\pi/2)\right)
+\end{align*}
+Adding these two integrals (and reinserting the factor of 2) gives\mks{6}
+\[F_n=\frac{4}{n^2\pi^2}\left(\sin(n\pi/2)+\frac{(-1)^n-1)}{n\pi}\right)\]
+so
+\[F(x)=\sum_{n=1}^{\infty}\frac{4}{n^2\pi^2}\left(\sin(n\pi/2)+\frac{(-1)^n-1)}{n\pi}\right)\sin(n\pi x).\]
+\item[(b)] The Euler-Lagrange equation
+\[\pd{}{x}\pd{L}{\partial_x\phi}+\pd{}{y}\pd{L}{\partial_y\phi}=0\]
+is
+\[\pd{}{x}2\phi_x+\pd{}{y}2\phi_y=0\]
+or
+\[\ppd{\phi}{x}+\ppd{\phi}{y}=0.\]
+This is just Laplace's equation.\mks{1}
+\item[(c)] So we need to solve Laplace's equation with the given boundary conditions. Since all the corner values vanish we can make the Ansatz
+\[\phi(x,y)=\sum_{n=1}^{\infty}A_n\sin(n\pi y)\sinh(n\pi(1-x))\]
+and deduce from $\phi(0,y)=F(y)$ that
+\[\sum_{n=1}^{\infty}A_n\sin(n\pi y)\sinh(n\pi)=\sum_{n=1}^{\infty}F_nsin(n\pi y)\]
+and so $A_n$ is $F_n\sinh(n\pi)$. Therefore the solution is\mks{3}
+\[\sum_{n=1}^{\infty}\frac{4}{n^2\pi^2\sinh(n\pi)}\left(\sin(n\pi/2)+\frac{(-1)^n-1)}{n\pi}\right)\sin(n\pi y)\sinh(n\pi(1-x))\]
+\end{enumerate}
+\end{answer}
+\newpage
+
+\begin{question}\ \\
+Show that the Euler-Lagrange equation for the functional
+\[\int_0^1\int_0^1\sqrt{1+\left(\pd{\phi}{x}\right)^2+\left(\pd{\phi}{y}\right)^2}dxdy\]
+is the {\em minimal surface equation}
+\[\ppd{\phi}{x}\left(1+\left(\pd{\phi}{y}\right)^2\right)+\ppd{\phi}{y}\left(1+\left(\pd{\phi}{x}\right)^2\right)=2\ppdd{\phi}{x}{y}\pd{\phi}{x}\pd{\phi}{y}.\]
+\end{question}
+
+\begin{answer}
+We will write $\phi_x$ for $\partial_x\phi$ and $j=\sqrt{1+\phi_x^2+\phi_y^2}$ for brevity. The Euler-Lagrange equation is
+\[\frac{\partial}{\partial x}\frac{\phi_x}{j}+\frac{\partial}{\partial y}\frac{\phi_y}{j}=0\]
+We have $\pd{}{x}\dfrac{\phi_x}{j}=\dfrac{\phi_{xx}}{j}-\dfrac{\phi_x}{j^2}\pd{j}{x}$ and $\pd{j}{x}=\dfrac{\phi_x\phi_{xx}+\phi_y\phi_{yx}}{j}$ (with a similar equation for the second term). Therefore the Euler-Lagrange equation implies
+\[
+0=\frac{\phi_{xx}+\phi_{yy}}{j}-\frac{1}{j^3}\left(\phi_x^2\phi_{xx}+2\phi_x\phi_y\phi_{xy}+\phi_y^2\phi_{yy}\right)
+\]
+or
+\[0=\phi_{xx}(1+\phi_y^2)+\phi_{yy}(1+\phi_x^2)-2\phi_x\phi_y\phi_{xy}.\]
+\end{answer}
+\newpage
+
+\bigskip
+
+\begin{question}
+Check that the function $\phi(x,y)=\sqrt{1-x^2-y^2}$ satisfies the {\em constant mean curvature equation}
+\[-\lambda=\pd{}{x}\left(\frac{\phi_x}{\sqrt{1+\phi_x^2+\phi_y^2}}\right)+\pd{}{y}\left(\frac{\phi_y}{\sqrt{1+\phi_x^2+\phi_y^2}}\right)\]
+for a suitable value of $\lambda$. This proves that hemispherical soap bubbles can exist!
+\end{question}
+
+
+\end{document}

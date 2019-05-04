@@ -1,0 +1,306 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+\newcommand{\laplcorn}[4]{
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) -- (0,1);
+  \draw (0,1) -- (1,1);
+  \draw (1,1) -- (1,0);
+  \draw (1,0) -- (0,0);
+  \node [above right] at (0,0) {$#1$};
+  \node [above left] at (1,0) {$#2$};
+  \node [below right] at (0,1) {$#3$};
+  \node [below left] at (1,1) {$#4$};
+\end{tikzpicture}
+}
+
+\title{Methods 3 - Question Sheet 3}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{question}(10 marks for * parts)\\
+Solve Laplace's equation for the following boundary value problems. You may use Fourier series you computed in Sheet 1 and standard formulas for general solutions from lectures provided you state them correctly.
+
+{
+\begin{center}\begin{tabular}{cc}
+\lapl{\phi}{0}{x+\pi}{y}{2y}{(a) *} & \lapl{\phi}{\pi^2x}{x^3}{\sin y}{\pi^3-\sin y}{(b) *}\\
+\lapl{\phi}{0}{\pi^2}{\pi y}{y^2}{(c)} & \lapl{\phi}{\cos x}{-\cos x}{1-2y/\pi}{2y/\pi-1}{(d)}\\
+\end{tabular}
+
+
+\end{center}
+}
+\end{question}
+
+\iffalse
+\begin{answer}
+The general solutions referred to in the question are
+
+\mlapl{}{0}{F(x)}{0}{0}{\phi} $\Rightarrow\quad\phi(x,y)=\sum A_n\fsin{n}\frac{\sinh(n\pi y/L)}{\sinh(n\pi)}$
+
+\mlapl{}{F(x)}{0}{0}{0}{\phi} $\Rightarrow\quad\phi(x,y)=\sum A_n\fsin{n}\frac{\sinh(n\pi (L-y)/L)}{\sinh(n\pi)}$
+
+\mlapl{}{0}{0}{0}{F(y)}{\phi} $\Rightarrow\quad\phi(x,y)=\sum A_n\sin\left(\frac{n\pi y}{L}\right)\frac{\sinh(n\pi x/L)}{\sinh(n\pi)}$
+
+\mlapl{}{0}{0}{F(y)}{0}{\phi} $\Rightarrow\quad\phi(x,y)=\sum A_n\sin\left(\frac{n\pi y}{L}\right)\frac{\sinh(n\pi (L-x)/L)}{\sinh(n\pi)}$
+
+where $A_n$ is the Fourier coefficient $(2/L)\int_0^LF(x)\fsin{n}dx$. These formulae may be cited as needed (or derived from the first one by symmetry arguments).
+\mks{1}
+\begin{enumerate}
+\item[(a)] * We first find a solution
+\[\phi_0(x,y)=A+Bx+Cy+Dxy\]
+to match the corner values. These are:
+
+\begin{center}\laplcorn{0}{0}{\pi}{2\pi}\end{center}
+
+Since $\phi_0(0,0)=0$ we have $A=0$. Since $\phi_0(\pi,0)=0$ we also have $B=0$. Since $\phi_0(0,\pi)=\pi$ we have $C=1$ and since $\phi_0(\pi,\pi)=2\pi$ we have $D=1/\pi$. Thus $\phi_0(x,y)=((x/\pi)+1)y$. If we set $\theta=\phi-\phi_0$ then the boundary conditions satisfied by $\theta$ vanish identically, so $\theta\equiv 0$. Thus $\phi=\phi_0=((x/\pi)+1)y$ is our solution.
+\mks{3}
+\item[(b)] * The corner values are
+
+\begin{center}\laplcorn{0}{\pi^3}{0}{\pi^3}\end{center}
+
+so $\phi_0(x,y)=\pi^2x$. The function $\theta=\phi-\phi_0$ satisfies the modified boundary conditions
+
+\begin{center}\lapl{\theta}{0}{x^3-\pi^2x}{\sin y}{-\sin y}{}\end{center}
+\mks{2}
+so we consider three problems separately
+
+\begin{center}
+\lapl{\theta_1}{0}{x^3-\pi^2x}{0}{0}{} \lapl{\theta_2}{0}{0}{\sin y}{0}{}
+
+\lapl{\theta_4}{0}{0}{0}{-\sin y}{}
+\end{center}
+
+We can solve for $\theta_4$ very easily: the Fourier series of $\sin y$ is just $\sin y$, so the solution is $\theta_4(x,y)=-\sin y\sinh x/\sinh\pi$.
+
+By symmetry we see that $\theta_2(x,y)=-\theta_4(\pi-x,y)=\sin y\sinh(\pi-x)/\sinh(\pi)$.
+\mks{2}
+
+Finally, the Fourier series of $x^3-\pi^2x$ (Sheet 1, Q. 2(a)) is
+\[x^3-\pi^2x=\sum_{n=1}^{\infty}\frac{12(-1)^n)}{n^3}\sin(nx)\]
+so
+\mks{2}
+\[\theta_1(x,y)=\sum_{n=1}^{\infty}\frac{12(-1)^n}{n^3}\frac{\sinh(ny)}{\sinh(n\pi)}\sin(nx).\]
+The final solution is $\phi=\phi_0+\theta_1+\theta_2+\theta_4$.
+\item[(c)] We first find a solution
+\[\phi_0(x,y)=A+Bx+Cy+Dxy\]
+to match the corner values. These are:
+
+\begin{center}\laplcorn{0}{0}{\pi^2}{\pi^2}\end{center}
+
+Arguing as in part (a) we get $\phi_0(x,y)=\pi y$. Therefore $\theta=\phi-\phi_0$ satisfies the modified boundary conditions
+
+\begin{center}\lapl{\theta}{0}{0}{0}{y^2-\pi y}{}\end{center}
+
+There is only one nonvanishing boundary condition so we do not need to split into several problems. The Fourier series of $y^2-\pi y$ is
+\[y^2-y=\sum_{n=1}^{\infty}A_n\sin(n\pi y),\qquad A_n=(2/\pi)\int_0^{\pi}(y^2-\pi y)\sin(n\pi y)dy.\]
+Integrating, we get:
+\[A_n=\frac{4}{n^3\pi}((-1)^n-1).\]
+The solution is therefore
+\[\theta(x,y)=\sum_{n=1}^{\infty}A_n\frac{\sinh(nx)}{\sinh(n\pi)}\sin(ny)\]
+and the solution to the whole problem is
+\[\phi(x,y)=\phi_0(x,y)+\theta(x,y)=\pi y+\sum_{n=1}^{\infty}\frac{4((-1)^n-1)}{n^3\pi}\frac{\sinh(nx)}{\sinh(n\pi)}\sin(ny).\]
+\item[(d)] The corner values are
+
+\begin{center}
+\laplcorn{1}{-1}{-1}{1}
+\end{center}
+
+so $\phi_0(x,y)=(1-2x/\pi)(1-2y/\pi)$. Then $\theta=\phi-\phi_0$ satisfies
+\begin{center}
+\lapl{\theta}{-1+\cos x+2x/\pi}{1-\cos x-2x/\pi}{0}{0}{}
+\end{center}
+
+We split this into two problems
+
+\begin{center}
+\lapl{\theta_1}{-1+\cos x+2x/\pi}{0}{0}{0}{} \lapl{\theta_3}{0}{1-\cos x-2x/\pi}{0}{0}{}
+\end{center}
+
+It is clear from symmetry considerations that $\theta_1(x,y)=-\theta_3(x,1-y)$.
+
+We solve for $\theta_2$. The Fourier series of $1-2x/\pi-\cos x$ is (Sheet 1, Q.2(b))
+\[1-2x/\pi-\cos x=-2\sum_{n=2}^{\infty}\frac{(-1)^n+1}{(n^2-1)n\pi}\]
+so the solution is
+\[\theta_3(x,y)=-2\sum_{n=2}^{\infty}\frac{((-1)^n+1)}{(n^2-1)n\pi}\frac{\sinh(ny)}{\sinh(n\pi)}\sin(nx)\]
+
+The full solution is $\phi=\phi_0+\theta_1+\theta_3$.
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+
+\begin{question}(5 marks for * part)\\
+Solve the wave equation
+\[\ppd{\phi}{x}=\ppd{\phi}{t}\]
+on $x\in [0,1]$ (so $L=1$) with boundary conditions $\phi(0,t)=\phi(1,t)=0$ for each of the initial conditions.
+\begin{enumerate}
+\item[(a)] * $\phi(x,0)=x-x^2$, $\pd{\phi}{t}(x,0)=0$.
+\item[(b)] $\phi(x,0)=x-x^3$, $\pd{\phi}{t}(x,0)=0$.
+\item[(c)] $\phi(x,0)=\cos 2\pi x-1$, $\pd{\phi}{t}(x,0)=0$.
+\end{enumerate}
+
+\end{question}
+
+\iffalse
+\begin{answer}
+In each case, the solution will be given as a linear combination of separated solutions
+\[\sum_{n=1}^{\infty}\sin(n\pi x)(A_n\cos(n\pi t)+B_n\sin(n\pi t))\]
+(where we have used the Dirichlet boundary conditions $\phi(0,t)=\phi(1,t)=0$ to rule out terms involving $\cos(n\pi x)$). The initial condition $\pd{\phi}{t}(x,0)=0$ in each case gives
+\[\sum_{n=1}^{\infty}n\pi B_n\sin(n\pi x)=0\]
+so $B_n=0$. The other initial condition $\phi(x,0)=F(x)$ gives
+\[\sum_{n=1}^{\infty}A_n\sin(n\pi x)=F(x)\]
+so $A_n$ is the $n$th half-range sine Fourier coefficient of $F$.
+\mks{3}
+\begin{enumerate}
+\item[(a)] * In this case the Fourier coefficient is
+\begin{align*}
+2\int_0^1(x-x^2)\sin(n\pi x)dx&=2\left(\cancelto{0}{\left[-(x-x^2)\frac{\cos(n\pi x)}{n\pi}\right]_0^1}+\frac{1}{n\pi}\int_0^1(1-2x)\cos(n\pi x)dx\right)\\
+&=\frac{2}{n\pi}\left(\cancelto{0}{\left[(1-2x)\frac{\sin(n\pi x)}{n\pi}\right]_0^1}-\frac{1}{n\pi}\int_0^1(-2)\sin(n\pi x)dx\right)\\
+&=\frac{4}{n^2\pi^2}\left[-\frac{\cos(n\pi x)}{n\pi}\right]_0^1\\
+&=\frac{4(1+(-1)^{n+1})}{n^3\pi^3}
+\end{align*}
+\mks{2}
+so the solution is
+\[\phi(x,t)=\sum_{n=1}^{\infty}\frac{4(1+(-1)^{n+1})}{n^3\pi^3}\sin(n\pi x)\cos(n\pi t).\]
+\item[(b)] $\phi(x,t)=\sum_{n=1}^{\infty}\frac{12(-1)^{n+1}}{n^3\pi^3}\sin(n\pi x)\cos(n\pi t)$.
+\item[(c)] $\phi(x,t)=\sum_{\substack{n=1\\ n\neq 2}}^{\infty}\frac{8(1+(-1)^{n+1})}{n\pi(n^2-4)}\sin(n\pi x)\cos(n\pi t)$. Note that the case $n=2$ must be dealt with separately as one ends up dividing by $n-2$ at some point in the solution (when integrating $\sin((n-2)\pi)$).
+\end{enumerate}
+\end{answer}
+\fi
+\newpage
+
+
+\begin{question}(5 marks)\\
+Suppose that $\phi$ satisfies the wave equation $\partial_t^2\phi=c^2\partial_x^2\phi$ where $c$ depends discontinuously on $x$:
+\[c(x)=\begin{cases}
+1 &\mbox{ if }x<0\\
+2 &\mbox{ if }x>0.
+\end{cases}\]
+We impose the boundary conditions $\phi(-L,t)=\phi(L,t)=0$ and the conditions that $\phi$ and $\partial_x\phi$ are continuous at $x=0$. Let $X(x)T(t)$ be a separated solution; the boundary conditions imply $X(-L)=X(L)=0$. If $T''/T=-m^2$, prove that $m$ satisfies
+\[\tan(mL)=-2\tan(mL/2).\]
+\end{question}
+
+\iffalse
+\begin{answer}
+Separated solutions to the wave equation with $T''/T=-m^2$ are
+\[X=A\sin(mx/c)+B\cos(mx/c),\quad T=C\sin(mt)+D\cos(mt).\]
+If $X(x)T(t)$ is the separated solution for $x<0$ then (using the formula for $c$):
+\[X(x)=\begin{cases}
+A_1\sin(mx)+B_1\cos(mx)&x<0\\
+A_2\sin(mx/2)+B_2\cos(mx/2)&x<0
+\end{cases}
+\]
+The continuity and differentiability of $X$ at $x=0$ imply
+\[B_1=B_2,\quad mA_1=mA_2/2\]
+so $A_2=2A_1$ and the solution is
+\[X(x)=\begin{cases}
+A_1\sin(mx)+B_1\cos(mx)&x<0\\
+2A_1\sin(mx/2)+B_1\cos(mx/2)&x<0
+\end{cases}
+\]
+\mks{2}
+Now we fix the boundary conditions $\phi(-L,t)=\phi(L,t)=0$.
+
+The conditions $\phi(\pm L,t)=0$ imply that $X(-L)=0$ and $X(L)=0$, so
+\begin{align*}
+A_1\sin(-mL)+B_1\cos(-mL)&=0\\
+2A_1\sin(mL/2)+B_1\cos(mL/2)&=0
+\end{align*}
+\mks{1}
+If $A_1=0$ then the only way to get a nontrivial solution is if $\cos(mL)=\cos(mL/2)=0$. This implies $m=2n\pi/L$ for some integer $n$ (and the equation $\tan(mL)=-2\tan(mL/2)$ is trivially satisfied because both sides vanish).
+
+If $A_1\neq 0$ then we get $B_1/A_1=\tan(mL)=-2\tan(mL/2)$ as required.
+\mks{2}
+
+{\em There is a discrete set of $m$ for which $\tan(mL)=-2\tan(mL/2)$, though it looks like a transcendental problem to give a general expression for such an $m$.}
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+
+\begin{question}\ \\
+Consider the wave equation $\ppd{\phi}{t}=\ppd{\phi}{x}$ on the interval $[0,1]$.
+\begin{enumerate}
+\item[(a)] Find the separated solutions satisfying $\phi(0,t)=0$, $\pd{\phi}{x}(1,t)=0$.
+\item[(b)] Find the full solution satisfying the boundary conditions in (a) and the initial conditions
+\[\phi(x,0)=\cos(x\pi/2),\quad \pd{\phi}{t}(x,0)=0.\]
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+The factors of separated solutions $X(x)T(t)$ obey the ODEs $X''=-\lambda X$, $T''=-\lambda T$. Thus
+\[X=\begin{cases}
+A\sin(px)+B\cos(px)&\mbox{ if }\lambda=p^2>0\\
+Ax+B&\mbox{ if }\lambda=0\\
+A\sinh(px)+B\cosh(px)&\mbox{ if }\lambda=-p^2<0.
+\end{cases}\]
+Case 1: $\lambda=p^2$. Setting $X(0)=0$ gives $B=0$. Setting $X'(1)=0$ gives $p=\left(n+\frac{1}{2}\right)\pi$.
+
+Case 2: $\lambda=0$. Setting $X(0)=0$ gives $B=0$. Setting $X'(1)=0$ gives $A=0$.
+
+Case 3: $\lambda=-p^2$. Setting $X(0)=0$ gives $B=0$. Setting $X'(1)=0$ gives $A=0$.
+
+Thus the nontrivial solutions are $\cos\left(\left(n+\frac{1}{2}\right)\pi x\right)$.
+
+We make an Ansatz for the solution of the form
+\[\phi(x,t)=\sum_{n=0}^{\infty}\cos\left(\left(n+\frac{1}{2}\right)\pi x\right)\left(A_n\sin\left(\left(n+\frac{1}{2}\right)\pi t\right)+B_n\cos\left(\left(n+\frac{1}{2}\right)\pi t\right)\right).\]
+Setting $t=0$ gives
+\[\phi(x,0)=\sum B_n\cos\left(\left(n+\frac{1}{2}\right)\pi x\right)\]
+which equals $\cos(x\pi/2)$ by the initial condition, so the only nonvanishing term is $B_0=1$. Differentiating the Ansatz with respect to $t$ and setting $t=0$ gives
+\[\pd{\phi}{t}(x,0)=\sum A_n\left(n+\frac{1}{2}\right)\pi\cos\left(\left(n+\frac{1}{2}\right)\pi x\right)=0\]
+which tells us that $A_n=0$ for all $n$. Therefore the solution is
+\[\phi(x,t)=\cos(\pi x/2)\cos(\pi t/2).\]
+\end{answer}
+\newpage
+\fi
+\bigskip
+
+\begin{question}\ \\
+Consider the 2-dimensional heat equation for a temperature distribution $\phi(x,y,t)$
+\[\pd{\phi}{t}=\ppd{\phi}{x}+\ppd{\phi}{y}.\]
+\begin{enumerate}
+\item[(a)] By separating variables $\phi(x,y,t)=X(x)Y(y)T(t)$, show that
+\[T=e^{Kt},\quad\ppd{\phi}{x}+\ppd{\phi}{y}=K\phi\]
+(remember this second equation is the Helmholtz equation from Sheet 2).
+\end{enumerate}
+For a separated solution, the Dirichlet conditions
+\[\phi(x,0,t)=\phi(x,1,t)=\phi(0,y,t)=\phi(1,y,t)=0\]
+mean that we require $X(0)=X(1)=Y(0)=Y(1)=0$. The possible separated solutions to the Helmholtz equation with these boundary conditions were $\sin(px)\sin(qx)$ with $p,q\in\pi\ZZ$, $K=-(p^2+q^2)$.
+\begin{enumerate}
+\item[(b)] What is the solution to the 2-dimensional heat equation with the initial condition $\phi(x,y,0)=x(1-x)\sin(\pi y)$?
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}
+\item[(a)] Separating variables we get
+\[XYT'=X''YT+XY''T\]
+so
+\[T'/T=(X''Y+XY'')/XY=K\]
+for some constant $K$. The $T$ equation gives $T=e^{Kt}$, the other equation is $X''Y+XY''=KXY$ or
+\[\ppd{\phi}{x}+\ppd{\phi}{y}=K\phi.\]
+\item[(b)] Our Ansatz for a solution is a linear combination of separated solutions
+\[\phi(x,y,t)=\sum_{m,n} B_{m,n}\sin(n\pi x)\sin(m\pi y)e^{-(n^2+m^2)\pi^2t}\]
+satisfying
+\[\phi(x,y,0)=\sum_{m,n} B_{m,n}\sin(n\pi x)\sin(m\pi y)=x(1-x)\sin(\pi y).\]
+Multiply by $\sin(k\pi y)$ and integrate from $-1$ to $1$ - the Fourier integral identities tell you that
+\[\sum_nB_{k,n}\sin(n\pi x)=x(1-x)\delta_{1,k}\]
+so take $B_{1,n}$ to be the $n$th Fourier coefficient of $x(1-x)$ and all other $B$ to be zero. Therefore the solution is
+\[\sum_{n=1}^{\infty}\frac{2((-1)^{n+1}+1)}{n^3\pi^3}\sin(n\pi x)\sin(\pi y)e^{-(n^2+1)\pi^2 t}.\]
+\end{enumerate}
+\end{answer}
+\fi
+
+
+\end{document}

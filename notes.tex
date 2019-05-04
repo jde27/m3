@@ -1,0 +1,143 @@
+\documentclass[12pt]{book}
+
+\include{notes-texhead}
+\usepackage{tikz}
+\newcommand{\lapl}[7]{
+\begin{center}
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) -- (0,1);
+  \draw (0,1) -- (1,1);
+  \draw (1,1) -- (1,0);
+  \draw (1,0) -- (0,0);
+  \node at (0.5,0.5) {#6};
+  \node [below] at (0.5,0) {$#1(x,0)=#2$};
+  \node [above] at (0.5,1) {$#1(x,#7)=#3$};
+  \node [left] at (0,0.5) {$#1(0,y)=#4$};
+  \node [right] at (1,0.5) {$#1(#7,y)=#5$};
+\end{tikzpicture}
+\end{center}
+}
+
+\newcommand{\onelapl}[6]{
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) -- (0,1);
+  \draw (0,1) -- (1,1);
+  \draw (1,1) -- (1,0);
+  \draw (1,0) -- (0,0);
+  \node at (0.5,0.5) {#6};
+  \node [below] at (0.5,0) {$#1(x,0)=#2$};
+  \node [above] at (0.5,1) {$#1(x,1)=#3$};
+  \node [left] at (0,0.5) {$#1(0,y)=#4$};
+  \node [right] at (1,0.5) {$#1(1,y)=#5$};
+\end{tikzpicture}
+}
+
+
+\newcommand{\mlapl}[6]{
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) -- (0,1);
+  \draw (0,1) -- (1,1);
+  \draw (1,1) -- (1,0);
+  \draw (1,0) -- (0,0);
+  \node at (0.5,0.5) {#1};
+  \node [below] at (0.5,0) {$#6(x,0)=#2$};
+  \node [above] at (0.5,1) {$#6(x,\pi)=#3$};
+  \node [left] at (0,0.5) {$#6(0,y)=#4$};
+  \node [right] at (1,0.5) {$#6(\pi,y)=#5$};
+\end{tikzpicture}
+}
+\newcommand{\laplneu}[6]{
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) -- (0,1);
+  \draw (0,1) -- (1,1);
+  \draw (1,1) -- (1,0);
+  \draw (1,0) -- (0,0);
+  \node at (0.5,0.5) {#6};
+  \node [below] at (0.5,0) {$#1(x,0)=#2$};
+  \node [above] at (0.5,1) {$#1(x,\pi)=#3$};
+  \node [left] at (0,0.5) {$\partial_x#1(0,y)=#4$};
+  \node [right] at (1,0.5) {$\partial_x#1(\pi,y)=#5$};
+\end{tikzpicture}
+}
+
+%\include{diagrams}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+
+
+% Upper part of the page
+
+.
+
+
+\begin{center}
+
+\vspace{2cm}
+
+\includegraphics[width=200px]{loc-max.jpg}
+
+\vspace{1cm}
+
+\textsc{\LARGE University College London}\\[1.5cm]
+
+\textsc{\Large Autumn Term 2014}\\[0.5cm]
+
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Mathematical Methods 3}\\[0.4cm]
+
+\HRule \\[1.5cm]
+
+% Author
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+Jonny Evans
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\includegraphics{by-sa.png}
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large Last updated \today}
+
+\end{center}
+
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\tableofcontents
+
+\part{Fourier theory and separation of variables}
+
+\include{fourier}
+
+\include{sepvar}
+
+
+\part{Calculus of variations}
+
+\include{euler-lagrange}
+
+\part{Partial differential equations}
+
+%\include{pde}
+
+\include{characteristics}
+
+\end{document}
+
+
+

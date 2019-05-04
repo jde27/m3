@@ -1,0 +1,266 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+\title{Methods 3 - Question Sheet 2}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{question}(7 marks)\\
+\begin{enumerate}[(a)]
+\item For each of the following PDEs for $\phi(x,y)$, separate variables ($\phi(x,y)=X(x)Y(y)$) and find the ODEs satisfied by $X$ and $Y$.
+\begin{enumerate}[(i)]
+\item $\ppd{\phi}{x}=\ppd{\phi}{y}+\pd{\phi}{y}+\phi$.\\
+(Telegraph equation, governing lossy wave transmission)
+\item $\ppd{\phi}{x}+\ppd{\phi}{y}=K\phi$ where $K$ is a constant.\\
+(Helmholtz equation, governing static temperature distributions in 2D)
+\end{enumerate}
+\item For equations (i) and (ii) above, solve the ODEs you found.\\
+{\em Be careful to distinguish the values of the separation constant $\lambda$ where the behaviour of $X$ changes and those where the behaviour of $Y$ changes.}
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}
+\item[(a)]
+\begin{enumerate}
+\item[(i)] We have $X''Y=XY''+XY'+XY$ so $X''/X=(Y''+Y'+Y)/Y=-\lambda$ is constant. Therefore
+\[X''=-\lambda X,\quad Y''+Y'+(1+\lambda)Y=0.\]
+\item[(ii)] $X''Y+XY''=KXY$ so $X''/X=-Y''/Y+K=-\lambda$ is constant. Therefore
+\[X''=-\lambda X,\quad Y''=(K+\lambda)Y.\]
+\end{enumerate}
+\mks{2}
+\item[(b)]
+In both cases the equation $X''=-\lambda X$ has the solutions
+\[X=\begin{cases}
+A\cos(px)+B\sin(px)&\mbox{ if }\lambda=p^2>0\\
+Ax+B&\mbox{ if }\lambda=0\\
+A\cosh(px)+B\sinh(px)&\mbox{ if }\lambda=-p^2<0.
+\end{cases}\]
+\mks{1}
+Let us analyse the $Y$ equations:
+\begin{enumerate}
+\item[(i)] The auxiliary quadratic is
+\[t^2+t+(1+\lambda)=0\]
+with roots $-\dfrac{1}{2}\pm\dfrac{1}{2}\sqrt{-(3+4\lambda)}$ so the equation has solutions
+\[Y=\begin{cases}
+e^{-y/2}(A\cos(qy)+B\sin(qy))&\mbox{ if }\frac{-3-4\lambda}{4}=-q^2<0\\
+e^{-y/2}(Ay+B)&\mbox{ if }-3-4\lambda=0\\
+e^{-y/2}(A\cosh(qy)+B\sinh(qy)&\mbox{ if }\frac{-3-4\lambda}{4}=q^2>0.
+\end{cases}\]
+\mks{2}
+\item[(ii)] The solution is
+\[Y=\begin{cases}
+A\cos(qy)+B\sin(qy)&\mbox{ if }K+\lambda=-q^2<0\\
+Ay+B&\mbox{ if }K+\lambda=0\\
+A\cosh(qy)+B\sinh(qy)&\mbox{ if }K+\lambda=q^2>0.
+\end{cases}\]
+\mks{2}
+\end{enumerate}
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+\vspace{0.5cm}
+
+\begin{question}(6 marks for * parts)\\
+In each case, solve the heat equation $\pd{\phi}{t}=\ppd{\phi}{x}$ for a temperature distribution $\phi(x,t)$ on the rod $x\in[0,\pi]$ with the given initial and boundary conditions. You may quote any Fourier series you need from Question Sheet 1:
+\begin{enumerate}[(a)]
+\item * $\phi(x,0)=x^3$, $\phi(0,t)=0$, $\phi(\pi,t)=\pi^3$ (Dirichlet).
+\item * $\phi(x,0)=\cos x$, $\phi(0,t)=1$, $\phi(\pi,t)=-1$ (Dirichlet).
+\item $\phi(x,0)=x^4-2\pi^2 x^2$, $\pd{\phi}{x}(0,t)=0$, $\pd{\phi}{x}(\pi,t)=0$ (Neumann).
+\item $\phi(x,0)=\cos x$, $\pd{\phi}{x}(0,t)=0$, $\pd{\phi}{x}(\pi,t)=0$ (Neumann).
+\item $\phi(x,0)=\begin{cases}x&\mbox{ if }x\in\left[0,\tfrac{\pi}{2}\right]\\ \pi-x&\mbox{ if }x\in\left[\tfrac{\pi}{2},\pi\right]\end{cases}$, $\phi(0,t)=0$, $\phi(\pi,t)=0$ (Dirichlet).
+\item $\phi(x,0)=e^x$, $\phi(0,t)=1$, $\phi(\pi,t)=e^{\pi}$ (Dirichlet).
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item * $\phi(x,0)=x^3$, $\phi(0,t)=0$, $\phi(\pi,t)=\pi^3$ (Dirichlet).
+
+First we subtract a steady solution of the form $\phi_0(x,t)=Ax+B$ to make the boundary conditions vanish. We need $\phi_0(x,t)=\pi^2x$. Defining $\Theta(x,t)=\phi(x,t)-\phi_0(x,t)$, we see that $\Theta$ is still a solution to the heat equation by linearity and that it now satisfies the Dirichlet conditions $\Theta(0,t)=\Theta(\pi,t)=0$, $\Theta(x,0)=x^3-\pi^2x$.
+\mks{2}
+Our Ansatz for $\Theta$ will be
+\[\sum_{n=1}^{\infty}b_n\sin(nx)e^{-n^2t}\]
+and the coefficients $b_n$ are determined by the initial condition
+\[\Theta(x,0)=x^3-\pi^2x=\sum_{n=1}^{\infty}b_n\sin(nx).\]
+\mks{1}
+In other words ,$b_n$ should be the Fourier coefficients of $x^3-\pi^2x$ which we calculated on Sheet 1 Q. 2(a) to be
+\[b_n=\frac{12(-1)^n}{n^3}.\]
+Therefore the final solution is
+\[\phi(x,t)=\phi_0(x,t)+\Theta(x,t)=\pi^2x+\sum_{n=1}^{\infty}\frac{12(-1)^n}{n^3}\sin(nx)e^{-n^2t}.\]
+\item * $\phi(x,0)=\cos x$, $\phi(0,t)=1$, $\phi(\pi,t)=-1$ (Dirichlet).
+
+The structure of the argument is the same as (a). We get $\phi_0(x,t)=1-2x/\pi$ and hence
+\mks{2}
+\[\Theta(x,0)=\cos x+\frac{2x}{\pi}-1=\sum_{n=1}^{\infty}\frac{2((-1)^n+1)}{\pi n(n^2-1)}\sin(nx)\]
+by Sheet 1, Q. 2(b). Therefore
+\mks{1}
+\[\phi(x,t)=1-\frac{2x}{\pi}+\sum_{n=1}^{\infty}\frac{2((-1)^n+1)}{\pi n(n^2-1)}\sin(nx)e^{-n^2t}.\]
+\item $\phi(x,0)=x^4-2\pi^2 x^2$, $\pd{\phi}{x}(0,t)=0$, $\pd{\phi}{x}(\pi,t)=0$ (Neumann).
+
+This time there is no need to modify the boundary conditions as they are already zero. If we take the half-range cosine series $a_0/2+\sum_{n=1}^{\infty}a_n\cos(nx)$ of $x^4-2\pi^2x^2$ then
+\[\phi(x,t)=a_0/2+\sum_{n=1}^{\infty}a_n\cos(nx)e^{-n^2t}\]
+will be a solution of the heat equation satisfying the correct initial condition and the Neumann boundary conditions (because each term $\cos(nx)$ has vanishing derivative at $0$ and $\pi$). In Sheet 1, Q. 4, we calculated this cosine series:
+\[x^4-2\pi^2x^2=-\frac{14\pi^4}{15}+48\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^4}\cos(nx)\]
+so the required solution is
+\[\phi(x,t)=-\frac{14\pi^4}{15}+48\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^4}\cos(nx)e^{-n^2t}.\]
+\item $\phi(x,0)=\cos x$, $\pd{\phi}{x}(0,t)=0$, $\pd{\phi}{x}(\pi,t)=0$ (Neumann).
+
+Again there is no need to modify the boundary conditions and this time the cosine series is very easy to find! It is just $\cos x$, so the required solution is $\phi(x,t)=(\cos x)e^{-t}$.
+\item $\phi(x,0)=\begin{cases}x&\mbox{ if }x\in\left[0,\tfrac{\pi}{2}\right]\\ \pi-x&\mbox{ if }x\in\left[\tfrac{\pi}{2},\pi\right]\end{cases}$, $\phi(0,t)=0$, $\phi(\pi,t)=0$ (Dirichlet).
+
+The boundary conditions are already vanishing so we do not need to modify them. We just need to find the Fourier series of $\phi(x,0)$ which was given in Sheet 1, Q. 2(d), as
+\[\sum_{n=1}^{\infty}\frac{4\sin(n\pi/2)}{n^2\pi}\sin(nx)\]
+so the required solution is
+\[\phi(x,t)=\sum_{n=1}^{\infty}\frac{4\sin(n\pi/2)}{n^2\pi}\sin(nx)e^{-n^2t}.\]
+\item $\phi(x,0)=e^x$, $\phi(0,t)=1$, $\phi(\pi,t)=e^{\pi}$ (Dirichlet).
+
+This time we proceed (as in (a)) by modifying the boundary condition. We need to subtract $\phi_0(x,t)=Ax+B$ where $\phi_0(0,t)=1$, $\phi_0(\pi,t)=e^{\pi}$ so we take $\phi_0(x,t)=(e^{\pi}-1)\frac{x}{\pi}+1$. Define $\Theta(x,t)=\phi(x,t)-\phi_0(x,t)$ which now has vanishing boundary conditions and initial condition $\Theta(x,0)=e^x-\frac{e^{\pi}-1}{\pi}x-1$. The Fourier series of this initial condition is $\sum_{n=1}^{\infty}\frac{2(e^{\pi}(-1)^n-1)}{n\pi(n^2+1)}\sin(nx)$ by Sheet 1, Q. 2(c) so the required solution is
+\[\phi(x,t)=(e^{\pi}-1)\frac{x}{\pi}+1+\sum_{n=1}^{\infty}\frac{2(e^{\pi}(-1)^n-1)}{n\pi(n^2+1)}\sin(nx)e^{-n^2t}.\]
+\end{enumerate}
+\end{answer}
+\fi
+\newpage
+
+\begin{question}(7 marks)\\
+Suppose $\phi(x,y)=X(x)Y(y)$ is a nontrivial separated solution of the Helmholtz equation $\ppd{\phi}{x}+\ppd{\phi}{y}=K\phi$ satisfying the boundary conditions $X(0)=X(1)=0$, $Y(0)=Y(1)=0$.
+\begin{enumerate}[(a)]
+\item Show that $\phi(x,y)=C\sin(px)\sin(qy)$ for some $p,q\in\pi\ZZ$, $C\in\RR$.
+\item Deduce that if there is a nontrivial separated solution then $K\in\pi^2\ZZ$.
+\item If $K=-2\pi^2$, deduce that the only solutions have the form $C\sin(\pi x)\sin(\pi y)$, $C\in\RR$, and sketch the graph of such a solution.
+\item How many solutions can you find when $K=-5\pi^2$? When $K=-50\pi^2$?
+\item Why is the space of solutions to the Helmholtz equation (for fixed $K$) a vector space? What is its dimension?
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item By Q. 1(a.ii) we know that (for some separation constant $\lambda$)
+
+\begin{align*}
+X&=\begin{cases}
+A\cos(px)+B\sin(px)&\mbox{ if }\lambda=p^2>0\\
+Ax+B&\mbox{ if }\lambda=0\\
+A\cosh(px)+B\sinh(px)&\mbox{ if }\lambda=-p^2<0.
+\end{cases}\\
+Y&=\begin{cases}
+C\cos(qy)+D\sin(qy)&\mbox{ if }K+\lambda=-q^2<0\\
+Cy+D&\mbox{ if }K+\lambda=0\\
+C\cosh(qy)+D\sinh(qy)&\mbox{ if }K+\lambda=q^2>0.
+\end{cases}
+\end{align*}
+
+If we impose the boundary conditions $X(0)=X(1)=0$ then we get:
+\begin{itemize}
+\item $\lambda>0$: $A=0$, $p\in\pi\ZZ$ (so $X=B\sin(px)$).
+\item $\lambda=0$: $A=B=0$.
+\item $\lambda<0$: $A=B=0$.
+\end{itemize}
+If we impose the boundary conditions $Y(0)=Y(1)=0$ then we get
+\begin{itemize}
+\item $K+\lambda<0$: $C=0$, $q\in\pi\ZZ$ (so $Y=D\sin(qy)$)
+\item $K+\lambda=0$: $C=D=0$.
+\item $K+\lambda>0$: $C=D=0$.
+\end{itemize}
+so to get a nontrivial solution we need $E\sin(px)\sin(qy)$ with $p,q\in\pi\ZZ$, $E=BD\in\RR$.
+\mks{2}
+\item In particular this means $\lambda=p^2\in\pi^2\ZZ$ and $-K-\lambda=q^2\in\pi^2\ZZ$, hence $-K=q^2+p^2\in\pi^2\ZZ$.
+\mks{1}
+\item Suppose that $p=m\pi$ and $q=n\pi$, $m,n\in\ZZ$. If $K=-2\pi^2$ then, since $K=-(p^2+q^2)=-\pi^2(m^2+n^2)$ we have $m^2+n^2=2$. But the only way to write $2$ as a sum of squares is as $1+1$, hence $m=n=1$. Thus $\phi(x,y)=E\sin(\pi x)\sin(\pi y)$.
+\mks{1}
+\item $5$ can be written as $1+4$ or $4+1$ so any linear combination of $\sin(x)\sin(2y)$ and $\sin(2x)\sin(y)$ gives a solution. $50$ can be written as $1+49$, $25+25$, $49+1$ so any linear combination of $\sin(\pi x)\sin(7\pi x)$, $\sin(5\pi x)\sin(5\pi y)$ and $\sin(7\pi x)\sin(\pi y)$ gives a solution.
+\mks{1}
+\item The space of solutions is a vector space because the equation is linear. In general, the dimension of the space of solutions for $K=-N\pi^2$ is the number of ways of writing $N$ as a sum of two positive square numbers $m^2+n^2$ (where the order of $m$ and $n$ matters, so $m=1$, $n=2$ is not the same as $m=2$, $n=1$).
+\mks{2}
+\end{enumerate}
+{\small Here's a little more explanation about the final part of the question, going into a lot more detail than I needed for the two marks available... (thanks to the person who asked me the questions which made me decide to write this out!). The space of all functions is a vector space: we can add functions, we can multiply them by any real number and we have a function 0. Let's restrict ourselves to functions $F$ which vanish at 0 and $L$ and for which $\int_0^LF^2dx<\infty$ (this is still a vector space! It's called $L^2([0,L])$). When doing Fourier theory, we discussed the fact that $\{\fsin{n}\}_{n=1}^{\infty}$ is something like a basis for this vector space: any function can be expanded as $F(x)=\sum_{n=1}^{\infty}A_n\fsin{n}$. For a basis we should really only take finite linear combinations of the basis vectors $\fsin{n}$, so this is really a ``Hilbert space basis'' (the infinite sum {\em converges} to $F$). You can think of the Fourier coefficients $A_n$ as the components of the ``vector'' $F$ in terms of the basis $\fsin{n}$.
+
+Now there's another vector space, $L^2([0,L]\times [0,L])$ consisting of functions $F(x,y)$ with $\int_0^L\int_0^LF^2dxdy<\infty$. If you fix $y$ you can Fourier expand $F(x,y)=\sum_{n=1}^{\infty}A_n(y)\fsin{n}$. You can then Fourier expand the coefficient $A_n(y)=\sum_{m=1}^{\infty}A_{mn}\fsin{n}\sin\left(\frac{m\pi y}{L}\right)$. Overall you get
+\[F(x,y)=\sum_{n=1}^{\infty}\sum_{m=1}^{\infty}A_{mn}\fsin{n}\sin\left(\frac{m\pi y}{L}\right).\]
+
+Let $L=1$. Inside the vector space $L^2([0,1]\times [0,1])$ there is a subspace of solutions to $\Delta\phi=K\phi$. To see it's a vector subspace, note that, by linearity of the equation, you can add two solutions or multiply them by a constant and the result is a solution. Our goal is to prove that the set $\sin(px)\sin(qy)$ where $p=n\pi$, $q=m\pi$, $m,n\in\ZZ$ and $K=-(n^2+m^2)\pi^2$ forms a basis for this subspace. Note that there are only finitely many possibilities for $m$ and $n$, so the space of solutions will be finite-dimensional.
+
+Suppose that $F(x,y)=\sum_{n=1}^{\infty}\sum_{m=1}^{\infty}A_{mn}\fsin{n}\sin\left(\frac{m\pi y}{L}\right)$ is a solution to $\Delta F=KF$. Then
+\begin{align*}
+\Delta F&=\sum_{m,n=1}^{\infty}A_{mn}(-n^2-m^2)\pi^2\fsin{n}\sin\left(\frac{m\pi y}{L}\right)\\
+        &=KF\\
+        &=\sum_{m,n=1}^{\infty}KA_{mn}\fsin{n}\sin\left(\frac{m\pi y}{L}\right)
+\end{align*}
+so comparing the coefficients of the basis element $\fsin{n}\sin\left(\frac{m\pi y}{L}\right)$ we see that $A_{mn}K=-A_{mn}\pi^2(n^2+m^2)$. So $A_{mn}(K+\pi^2(n^2+m^2))=0$ and either $A_{mn}=0$ or $K=-\pi^2(n^2+m^2)$. Therefore the solution is
+\[F(x,y)=\sum A_{mn}\fsin{n}\sin\left(\frac{m\pi y}{L}\right)\]
+where the sum extends over just those $m$ and $n$ which satisfy $(n^2+m^2)\pi^2=-K$. This is what we wanted to show!
+}
+\end{answer}
+\newpage
+\fi
+
+\vspace{0.5cm}
+
+\begin{question}\ \\
+The Schr\"{o}dinger equation for the complex probability amplitude $\psi(x,t)$ of a free particle is
+\[-i\hbar\pd{\psi}{t}=-\frac{\hbar^2}{2m}\ppd{\psi}{x}\]
+where $\hbar$, $m$ are constants and $i=\sqrt{-1}$.
+
+\begin{enumerate}[(a)]
+\item Separate variables $\psi(x,t)=X(x)T(t)$ and show that $T(t)=e^{iEt/\hbar}$ for some constant $E$ (called the {\em energy} - in our language it arises as a separation constant).
+\item Assume that $X(0)=X(L)$ (i.e. we are considering a free particle living in the interval $[0,L]$). Show that the energy of a separated solution is {\em quantised}: it can only take on values $\dfrac{n^2\hbar^2\pi^2}{2mL^2}$.
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item Separating variables we get
+\[-\frac{\hbar^2}{2m}\frac{X''}{X}=E=-i\hbar\frac{T'}{T}\]
+so $T'=iET/\hbar$. This has solution $T=e^{iEt/\hbar}$.
+\item The other equation gives $X''=-\frac{2mE}{\hbar^2}X$ so
+\[X=\begin{cases}
+A\cos(px)+B\sin(px)&\mbox{ if }\frac{2mE}{\hbar^2}=p^2>0\\
+Ax+B&\mbox{ if }\frac{2mE}{\hbar^2}=0\\
+A\cosh(px)+B\sinh(px)&\mbox{ if }\frac{2mE}{\hbar^2}=-p^2<0.
+\end{cases}\]
+The boundary conditions $X(0)=X(L)=0$ give
+\begin{itemize}
+\item $\frac{2mE}{\hbar^2}>0$: $A=0$, $p\in(\pi/L)\ZZ$ (so $X=B\sin(px)$).
+\item $\frac{2mE}{\hbar^2}=0$: $A=B=0$.
+\item $\frac{2mE}{\hbar^2}<0$: $A=B=0$.
+\end{itemize}
+so $p=n\pi/L$ and hence $\frac{2mE}{\hbar^2}=\frac{n^2\pi^2}{L^2}$. This implies $E=\frac{n^2\pi^2\hbar^2}{2mL^2}$ for some $n\in\ZZ$.
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}\ \\
+Let $X(x)T(t)$ be a separated solution to the heat equation and suppose that it satisfies Neumann boundary conditions $X'(0)=X'(L)=0$. Show that $X=A\fcos{n}$ for some $n\in\ZZ$ ({\em Note: $n=0$ is allowed}).
+\end{question}
+
+\iffalse
+\begin{answer}
+Separation of variables implies $X''=-\lambda X$ for some $\lambda$ so
+\[
+X(x)=\begin{cases}
+A\cos px+B\sin px&\mbox{ if }\lambda=p^2>0\\
+A+Bx &\mbox{ if }\lambda=0\\
+A\cosh px+B\sinh px&\mbox{ if }\lambda=-p^2<0.\\
+\end{cases}
+\]
+If $\lambda<0$ then $X'(0)=Bp\cosh(0)=0$ so $B=0$ and $X'(L)=Ap\sinh(L)=0$ so $A=0$.
+
+If $\lambda=0$ then $X'(0)=X'(L)=B=0$. It is still possible that $A\neq 0$ in which case $X=A=A\fcos{0}$.
+
+If $\lambda>0$ then $X'(0)=Bp\cos(0)=0$ so $B=0$ and $X'(L)=-Ap\sin(pL)=0$ so $\sin(pL)=0$ so $pL=n\pi$ for some $n\in\ZZ$.
+\end{answer}
+\fi
+
+\end{document}

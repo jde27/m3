@@ -1,0 +1,109 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+\title{Methods 3 - Question Sheet 0}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+This is intended as a revision sheet: everything on it was covered at A-level or in Methods 1 and 2. I encourage you to look through it and make sure you remember how to do everything before it comes up in lectures.
+
+\begin{question}(Will be useful for Fourier series)\\
+Integrate the following functions (in each case $n$ is an integer).
+\begin{enumerate}
+\item $\int_0^{\pi}x(x-\pi)\sin(nx)dx$.
+\item $\int_0^1(\cos(2\pi x)-1)\sin(n\pi x)dx$.
+\item $\int_0^{\pi}x\sin(nx)dx$.
+\item $\int_0^{\pi}x^3\sin(nx)dx$.
+\item $\int_0^{\pi}e^x\sin(nx)dx$.
+\end{enumerate}
+\end{question}
+
+\bigskip
+
+\begin{question}(Will be useful for separation of variables)\\
+What is the general solution of the following second order ODEs? In each case, $k$ is a constant.
+\begin{enumerate}[(a)]
+\item $y''=-k^2y$,
+\item $y''=k^2y$,
+\item $y''+y'+k^2y=0$,
+\item $y''=y+x$.
+\end{enumerate}
+\end{question}
+
+\bigskip
+
+\begin{question}(Will be useful for solving Euler-Lagrange equations)\\
+Do the following integrals ($C$ is a constant):
+\begin{enumerate}
+\item[(a)] $\int\frac{du}{\sqrt{u-1}}$,
+\item[(b)] $\int\frac{du}{\sqrt{1-u^2}}$
+\item[(c)] $\int\frac{dy}{\sqrt{\frac{1}{Cy^2}-1}}$
+\item[(d)] $\int\frac{dy}{\sqrt{\frac{1}{-Cy}-1}}$ (Note: This makes sense as long as $-1<Cy<0$).
+\item[(e)] $\int\frac{dt}{\sin t\sqrt{\sin^2 t-C^2}}$ ({\em Hint: Make a substitution $u=\cot t$ to put the integrand into a more familiar form.}).
+\end{enumerate}
+\end{question}
+
+\bigskip
+
+\begin{question}(Will be useful for constrained Euler-Lagrange)\\
+Find the critical points of the function
+\[F(x,y,z)=x^2+3y^2+z^2\]
+subject to the constraints:
+\begin{enumerate}
+\item[(a)] $x^2+y^2-z^2=2$.
+\item[(b)] $x^2+y^2-z=2$, $x^2-y^2-z=3$.
+\end{enumerate}
+{\em Hint: For (b) use two Lagrange multipliers, one for each constraint.}
+\end{question}
+
+\bigskip
+
+{\em The next two questions focus on the chain rule; make sure you are using the version of the chain rule from Methods 2, valid for functions of several variables, rather than the usual one-variable chain rule!}
+
+\bigskip
+
+\begin{question}(Will be useful for Euler-Lagrange and method of characteristics)\\
+Let $(u(x,y),v(x,y))$ be a vector-valued function of two variables and let
+$(x(t),y(t))$ be a path in the plane. If we consider the values of $(u,v)$
+along the path, $(u(x(t),y(t)),v(x(t),y(t)))$, what does the chain rule
+tell us that $\dd{u}{t}$ and $\dd{v}{t}$ are? Show that this is equivalent
+to the matrix identity:
+
+\[
+\left(
+   \begin{array}{c}
+        \dd{u}{t}\\
+        \dd{v}{t}
+   \end{array}
+\right)   =   \left(
+                 \begin{array}{cc}
+                      \pd{u}{x} & \pd{u}{y}\\
+                      \pd{v}{t} & \pd{v}{y}
+                 \end{array}
+              \right)                       \left(
+                                               \begin{array}{c}
+                                                    \dd{x}{t}\\
+                                                    \dd{y}{t}
+                                               \end{array}
+                                            \right)
+\]
+
+Find the derivative of $F(x,y)=\sin(xy^2)$ restricted to the path $(x(t),y(t))=(1+t,1-t)$ at the point $t=0$:
+\begin{enumerate}
+ \item[(a)] directly and
+ \item[(b)] using the chain rule.
+\end{enumerate}
+\end{question}
+
+\bigskip
+
+\begin{question}(D'Alembert's method)\\
+Let $c$ be a real number and let $\phi(x,t)$ be a function on $\RR^2$. Define $u$ and $v$ by $u=x+ct$ and $v=x-ct$. Find an expression for $x$ and $t$ in terms of $u$ and $v$ and hence (or otherwise) show that
+\[\ppdd{\phi}{u}{v}=\frac{1}{4}\left(\ppd{\phi}{x}-\frac{1}{c^2}\ppd{\phi}{t}\right).\]
+If $\phi$ is a solution to $\ppd{\phi}{x}-\dfrac{1}{c^2}\ppd{\phi}{t}$, deduce that there exist functions $F$ and $G$ such that $\phi(x,t)=F(x+ct)+G(x-ct)$.
+\end{question}
+
+\end{document}

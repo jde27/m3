@@ -1,0 +1,548 @@
+\chapter{Separation of variables}
+
+\section{Separation of variables for the heat equation}
+
+When we explained how to solve the heat equation we guessed an infinite collection of solutions $\sin nx e^{-n^2t}$. In this section we will see how to derive these solutions systematically.
+
+\subsection{Separating variables}
+
+\begin{dfn}
+A {\em separated solution} to the heat equation is a solution which has the form $\phi(x,t)=X(x)T(t)$ (where $X$ is a function depending only on $x$ and $T$ is a function depending only on $t$). We will denote the derivative $dX/dx$ by $X'$ and the derivative $dT/dt$ also by $T'$; in other words, a prime on a function of a single variable means ``differentiate with respect to the variable''.
+\end{dfn}
+
+\begin{lma}\label{lma:sepvar}
+If $XT$ is a separated solution then there is a constant $\lambda$ such that $X''=-\lambda X$ and $T'=-\lambda T$ (the minus sign is just a convention to make our lives easier later).
+\end{lma}
+\begin{proof}
+The heat equation states that
+\[\pd{\phi}{t}=\ppd{\phi}{x}.\]
+Differentiating $XT$ with respect to $t$ gives $XT'$. Differentiating twice with respect to $x$ give $X''T$. Therefore the heat equation implies
+\[XT'=X''T.\]
+Dividing through by $XT$ gives
+\[\frac{T'}{T}=\frac{X''}{X}.\]
+We define this quantity to be $-\lambda(x,t)$. Since $-\lambda(x,t)=X''/X$ does not depend on $t$ and $-\lambda(x,t)=T'/T$ does not depend on $x$, we see that $\lambda$ is constant.
+\end{proof}
+
+\subsection{Solving for the separated solutions}
+
+Solving the two ordinary differential equations in Lemma \ref{lma:sepvar} we get:
+
+\begin{cor}
+If $XT$ is a separated solution to the heat equation then $T=e^{-\lambda t}$ and
+\[
+X=\begin{cases}
+  A\cos px+B\sin px&\mbox{ if }\lambda=p^2>0\\
+  Ax+B&\mbox{ if }\lambda=0\\
+  A\cosh px+B\sinh px&\mbox{ if }\lambda=-p^2<0.
+\end{cases}
+\]
+\end{cor}
+
+\subsection{Fitting to boundary conditions}
+
+We now have a large array of separated solutions. To narrow this down we will impose some boundary conditions at the ends of the rod. Two common boundary conditions are:
+\begin{itemize}
+\item Dirichlet boundary conditions (where you specify the values of $\phi$ at the endpoints of the rod):
+\[\phi(0,t)=M,\quad\phi(L,t)=N.\]
+This means that we keep the endpoints of the rod at constant temperature.
+\item Neumann boundary conditions (where you specify the values of the derivative $\pd{\phi}{x}$ at the endpoints of the rod):
+\[\pd{\phi}{x}(0,t)=0,\quad\pd{\phi}{x}(L,t)=0.\]
+Since the flow of heat is proportional to the gradient of $\phi$ this implies that there is no heat flowing out of the ends of the rod, i.e. the ends are insulated.
+\end{itemize}
+To find a unique solution to the heat equation we will also need to impose an initial condition $\phi(x,0)=F(x)$ for some function $F$.
+
+\begin{rmk}\label{rmk:modify}
+We can make a modification to assume $M=N=0$. If $\phi(x,t)$ is a solution to the heat equation satisfying the Dirichlet conditions
+\[\phi(0,t)=M,\quad\phi(L,t)=N,\quad\phi(x,0)=F(x)\]
+and $\phi_0(x,t)=M+\frac{N-M}{L}x$ then $\theta(x,t)=\phi(x,t)-\phi_0(x,t)$ is a solution of the heat equation satisfying the boundary conditions
+\[\theta(0,t)=\theta(L,t)=0,\quad\theta(x,0)=F(x)-\phi_0(x,0).\]
+Note that $\theta$ is a linear combination of solutions to the heat equation, so it is automatically a solution since the equation is linear.
+\end{rmk}
+
+For a separated solution $\phi=XT$ to satisfy the Dirichlet conditions $\phi(0,t)=\phi(L,t)=0$ implies $X(0)T(t)=X(L)T(t)=0$ for all $t$, so $X(0)=X(L)=0$ or $T\equiv 0$. We are not interested in the trivial solution $\phi=0$, so let us examine the consequences of imposing $X(0)=X(L)=0$.
+
+\begin{lma}\label{lma:dirichlet}
+A separated solution $XT$ of the heat equation satisfying $X(0)=X(L)=0$ has the form
+\[B\fsin{n}e^{-n^2\pi^2t/L^2}.\]
+\end{lma}
+\begin{proof}
+If $\lambda=-p^2<0$ then the boundary conditions imply:
+\begin{align*}
+0&=A\cosh(0)+B\sinh(0)\\
+ &=A\ \Rightarrow A=0,\\
+0&=A\cosh(pL)+B\sinh(pL)\\
+ &=B\sinh(pL)\mbox{ as }A=0\\
+ &\Rightarrow B=0\mbox{ as }\sinh(pL)\neq 0.
+\end{align*}
+so the only possibility is the trivial solution $A=B=0$.
+
+If $\lambda=0$ then the boundary conditions imply:
+\begin{align*}
+0&=A\times 0+B\\
+ &=B\ \Rightarrow B=0,\\
+0&=AL+B\\
+ &=AL\mbox{ as }B=0\\
+ &\Rightarrow A=0.
+\end{align*}
+
+Finally, if $\lambda=p^2>0$ then the boundary conditions imply:
+\begin{align*}
+0&=A\cos 0+B\sin 0\\
+ &=A\ \Rightarrow A=0,\\
+0&=A\cos pL+B\sin pL\\
+ &=B\sin pL\mbox{ as }A=0\\
+ &\Rightarrow B=0\mbox{ or }\sin pL=0.
+\end{align*}
+The only way to get a nontrivial solution is therefore if $\sin pL=0$ or $pL=n\pi$ for some $n\in\ZZ$. Therefore $X=B\fsin{n}$ and $T=e^{-n^2\pi^2t/L^2}$.
+\end{proof}
+
+Neumann conditions translate into $X'(0)=X'(L)=0$.
+
+\begin{lma}
+A separated solution $XT$ of the heat equation satisfying $X'(0)=X'(L)=0$ has the form
+\[A\fcos{n}e^{-n^2\pi^2t/L^2}.\]
+\end{lma}
+\begin{proof}
+Exercise.
+\end{proof}
+
+\subsection{Ansatz}
+
+We can now take an arbitrary linear combination of separated solutions and the result is again a solution to the heat equation by linearity of the heat equation. Our strategy in solving the heat equation will therefore be: guess that the final solution has the form
+\[\phi(x,t)=\sum_{n=1}^{\infty}B_n\fsin{n}e^{-n^2\pi^2t/L^2}\]
+and try to choose the coefficients $B_n$ to fit the initial condition $\phi(x,0)=F(x)$. This is called making an {\em Ansatz} (``an educated guess that is later verified by its results'' - Wikipedia).
+
+\subsection{Fitting to initial conditions}
+
+Substituting the Ansatz into the initial condition gives
+\[F(x)=\phi(x,0)=\sum_{n=1}^{\infty}B_n\fsin{n}\]
+because $e^{-n^2\pi^20/L^2}=1$. Therefore we see that $B_n$ is the $n$th coefficient in the half-range Fourier sine series for $F(x)$.
+
+\subsection{Examples}
+
+\begin{exm}
+{\bf Solve the heat equation with the initial condition $\phi(x,0)=-x^2$ and the Dirichlet boundary conditions $\phi(0,t)=0$, $\phi(\pi,t)=-\pi^2$.}
+
+We have $M=0$, $N=-\pi^2$ so $\phi_0(x,t)=-\pi x$. Therefore $\phi=\phi_0+\theta$ where $\theta$ solves the heat equation with the initial condition $\theta(x,0)=-x^2-(-\pi x)=x(\pi-x)$ and the boundary conditions $\theta(0,t)=\theta(\pi,t)=0$. We make the Ansatz $\theta(x,t)=\sum_{n=1}^{\infty}B_n\sin(nx)e^{-n^2t}$ for $\theta$ and substitute in the initial condition $\theta(x,0)=x(\pi-x)$ to get
+\[x(\pi-x)=\sum_{n=1}^{\infty}B_n\sin(nx).\]
+Therefore $B_n$ is the $n$th Fourier coefficient of $x(\pi-x)$, which we found in Example \ref{exm:xpiminusxsquared} to be
+\[B_n=\frac{4}{n^3\pi}((-1)^{n+1}+1).\]
+Therefore the final solution is
+\[\phi(x,t)=-\pi x+\sum_{n=1}^{\infty}\frac{4}{n^3\pi}((-1)^{n+1}+1)\sin(nx)e^{-n^2t}.\]
+\end{exm}
+
+\begin{rmk}
+Notice that the higher Fourier modes (the terms with large $n$ in the sum) decay like $e^{-n^2t}$, faster than when $n$ is small. Physically this makes sense: heat flows down a temperature gradient and when $n$ is large, $\sin(nx)$ is very wiggly (it has large gradient). Therefore heat flows more quickly to even out the temperature distribution. As $t\to\infty$ the distribution tends to the linear temperature distribution $-\pi x$ (a so-called {\em steady} solution to the heat equation because it does not depend on $t$).
+\end{rmk}
+\begin{rmk}
+If $\lambda<0$ then $e^{-\lambda t}$ would quickly get large. This would be unphysical: temperature distributions don't just spontaneously get hotter! This shows that the choice of boundary conditions is an important part of the physical input into the problem.
+\end{rmk}
+
+\begin{exm}
+{\bf Solve the heat equation with the Neumann conditions $\pd{\phi}{x}(0,t)=\pd{\phi}{x}(\pi,t)=0$ and the initial condition $\phi(x,0)=\sin^2x$.}
+
+In this example we don't need to modify with a $\phi_0$ term but we do need to use $A\cos(nx)e^{-n^2t}$ rather than the sine solution like the previous example, because we are using Neumann conditions. Note that by trigonometry we have $\sin^2x=\frac{1}{2}(1-\cos(2x))$ which is the half-range Fourier cosine series of $\sin^2x$ (there's only one way to express a given function as a Fourier cosine series and this is it for $\sin^2x$).
+
+The Ansatz is
+\[\phi(x,t)=\sum_{n=1}^{\infty}A_n\cos(nx)e^{-n^2t}\]
+and the initial condition gives
+\[\sin^2x=\phi(x,0)=\sum_{n=1}^{\infty}A_n\cos(nx)\]
+so, comparing with the Fourier series $\sin^2x=\frac{1}{2}(1-\cos(2x))$ we see that $A_0=\frac{1}{2}$, $A_2=-\frac{1}{2}$ and all other coefficients vanish. Therefore
+\[\phi(x,t)=\frac{1}{2}-\frac{1}{2}\cos(2x)e^{-4t}.\]
+\end{exm}
+
+\section{Separation of variables: the general strategy}
+
+\begin{itemize}
+\item Separate variables and find the separated solutions.
+\item Determine which separated solutions satisfy the boundary conditions.
+\item Form an Ansatz for the general solution by taking an infinite linear combination of the separated solutions satisfying the boundary conditions.
+\item Choose the coefficients in the Ansatz to fit the initial conditions.
+\end{itemize}
+
+Sometimes one also needs to modify the problem by subtracting off a simple (e.g. linear) solution to make the boundary conditions amenable to solution by the Ansatz. For example, we saw this in Remark \ref{rmk:modify} and we will see it again! 
+
+\section{The wave equation}
+
+The wave equation is
+\[\frac{1}{c^2}\ppd{\phi}{t}=\ppd{\phi}{x}\]
+where $c$ is a constant called the wave speed. It describes
+\begin{itemize}
+\item vibrations in a one-dimensional string,
+\item waves in water,
+\item electromagnetic waves.
+\end{itemize}
+In each case, $\phi(x,t)$ describes the displacement (vertical displacement of the string or of the water surface, displacement of the electric or magnetic field away from zero) at the point $x$ at time $t$. We will derive it later from a variational principle: the string is trying to find the optimal balance between its kinetic energy and internal tension potential energy.
+
+If $\phi(x,t)=X(x)T(t)$ is a separated solution then
+\[\frac{1}{c^2}XT''=X''T\]
+so $\frac{T''}{c^2T}=\frac{X''}{X}=-\lambda$ is a constant. Therefore $X''=-\lambda X$, giving
+\[
+X=\begin{cases}
+  A\cos px+B\sin px&\mbox{ if }\lambda=p^2>0\\
+  Ax+B&\mbox{ if }\lambda=0\\
+  A\cosh px+B\sinh px&\mbox{ if }\lambda=-p^2<0,
+\end{cases}
+\]
+and $T''=-c^2\lambda T$, giving
+\[
+T=\begin{cases}
+  C\cos pct+D\sin pct&\mbox{ if }\lambda=p^2>0\\
+  Ct+D&\mbox{ if }\lambda=0\\
+  C\cosh pct+D\sinh pct&\mbox{ if }\lambda=-p^2<0.
+\end{cases}
+\]
+The boundary conditions we will impose are either Dirichlet conditions
+\[X(0)=M,\ X(L)=N\]
+or Neumann conditions
+\[X'(0)=X'(L)=0.\]
+Since the wave equation is second order in $t$, we will additionally need two initial conditions,
+\[\phi(x,0)=F(x),\qquad\pd{\phi}{t}(x,0)=G(x).\]
+We will focus on the Dirichlet conditions with $M=N=0$. As in Lemma \ref{lma:dirichlet} these conditions imply
+\[X(x)=\fsin{n}\]
+for some $n\in\ZZ$. A general Ansatz for these boundary conditions is therefore
+\[\sum_{n=1}^{\infty}\left(C_n\cos\left(\frac{n\pi ct}{L}\right)+D_n\sin\left(\frac{n\pi ct}{L}\right)\right)\fsin{n}.\]
+\begin{exm}
+{\bf Solve the wave equation for a string of length $L=\pi$ subject to the initial conditions}
+\[\phi(x,0)=x(\pi-x),\qquad\pd{\phi}{t}(x,0)=0.\]
+We need to satisfy
+\[\phi(x,0)=\sum_{n=1}^{\infty}C_n\sin(nx)=x(\pi-x)\]
+so $C_n$ must be the $n$th Fourier coefficient of $x(\pi-x)$, i.e.
+\[C_n=\frac{4}{n^3\pi}((-1)^{n+1}+1).\]
+We also need to satisfy
+\[\pd{\phi}{t}(x,0)=\sum_{n=1}^{\infty}(nc)D_n\sin(nx)=0\]
+so $(n\pi c/L)D_n$ must be the $n$th Fourier coefficient of 0, i.e.
+\[D_n=0.\]
+The solution is therefore
+\[\phi(x,t)=\sum_{n=1}^{\infty}\frac{4((-1)^{n+1}+1)}{n^3\pi}\sin(nct)\sin(nx).\]
+\end{exm}
+
+\begin{exm}
+{\bf Solve the wave equation for a string of length $L=\pi$ subject to the initial conditions}
+\[\phi(x,0)=0,\qquad
+\pd{\phi}{t}(x,0)=
+\begin{cases}
+x&\mbox{ if }x\in[0,\pi/2]\\
+\pi-x&\mbox{ if }x\in[\pi/2,\pi].
+\end{cases}\]
+We need to satisfy
+\[\phi(x,0)=\sum_{n=1}^{\infty}C_n\sin(nx)=0\]
+so $C_n=0$. We also need to satisfy
+\[\pd{\phi}{t}(x,0)=\sum_{n=1}^{\infty}ncD_n\sin(nx)=\begin{cases}
+x&\mbox{ if }x\in[0,\pi/2]\\
+\pi-x&\mbox{ if }x\in[\pi/2,\pi].
+\end{cases}\]
+so $ncD_n$ must be the $n$th Fourier coefficient of this function. This means
+\[D_n=\frac{4\sin(n\pi/2)}{n^3c\pi}\]
+and therefore
+\[\phi(x,t)=\sum_{n=1}^{\infty}\frac{4\sin(n\pi/2)}{n^3c\pi}\sin(nct)\sin(nx).\]
+\end{exm}
+
+\begin{rmk}
+The solution
+\[\fsin{n}\left(C_n\cos\left(\frac{n\pi ct}{L}\right)+D_n\sin\left(\frac{n\pi ct}{L}\right)\right)\]
+is called the $n$th mode of vibration. Notice that the higher modes oscillate faster and have shorter wavelength. The $n$th mode oscillates once every $2L/nc$ units of time (so the period of oscillation is $2L/nc$) and has wavelength $2L/n$. This tells us that the frequency of oscillation ($f$, the reciprocal of the period) times the wavelength always equals $c$:
+\[\lambda f=c.\]
+Other, nonlinear, wave equations have more interesting relationships between frequency, wavelength of wave speed.
+\end{rmk}
+
+\section{Equations with discontinuities}
+
+Consider the wave equation
+\[\frac{1}{c(x)^2}\ppd{\phi}{t}=\ppd{\phi}{x}\]
+but with discontinuously varying speed
+\[c(x)=\begin{cases}
+1&\mbox{ if }x<0\\
+2&\mbox{ if }x>0
+\end{cases}\]
+Separating variables we get
+\[XT''=c(x)^2X''T\]
+or
+\[\frac{T''}{T}=c(x)^2\frac{X''}{X}=-\lambda.\]
+The equation for $T$ is $T''=-\lambda T$ so we get
+\[
+T=\begin{cases}
+  C\cos pt+D\sin pt&\mbox{ if }\lambda=p^2>0\\
+  Ct+D&\mbox{ if }\lambda=0\\
+  C\cosh pt+D\sinh pt&\mbox{ if }\lambda=-p^2<0.
+\end{cases}
+\]
+For $X$ the equation is
+\[
+X''=\begin{cases}
+-\lambda X&\mbox{ if }x<0\\
+-\frac{1}{4}\lambda X&\mbox{ if }x>0
+\end{cases}
+\]
+which has solutions
+\begin{align*}
+(x<0)\quad X&=\begin{cases}
+  A\cos px+B\sin px&\mbox{ if }\lambda=p^2>0\\
+  Ax+B&\mbox{ if }\lambda=0\\
+  A\cosh px+B\sinh px&\mbox{ if }\lambda=-p^2<0,
+\end{cases}\\
+(x>0)\quad X&=\begin{cases}
+  A'\cos px/2+B'\sin px/2&\mbox{ if }\lambda=p^2>0\\
+  A'x+B'&\mbox{ if }\lambda=0\\
+  A'\cosh px/2+B'\sinh px/2&\mbox{ if }\lambda=-p^2<0,
+\end{cases}
+\end{align*}
+Now we have six constants $A,B,A',B',C,D$ which we have to fix somehow using boundary conditions. This is because of the discontinuity - we have to find a way to match up different solutions on either side of the discontinuity. The easiest way is to require that our solutions are (a) continuous and (b) continuously differentiable, even across the interface at $x=0$. This is called an interface condition.
+
+If $X$ is continuous at $x=0$ then the limit $\lim_{x\to 0}X(x)$ must give the same answer however we compute it, whether the limit is taken through negative or positive values of $x$. This means that
+\[\lim_{x\to 0}(A\cos px+B\sin px)=A\]
+must agree with
+\[\lim_{x\to 0}(A'\cos px/2+B'\sin px/2)=A'\]
+i.e. $A=A'$.
+
+If $X'$ is continuous at $x=0$ then the limit $\lim_{x\to 0}X'(x)$ must give the same answer however we compute it, whether the limit is taken through negative or positive values of $x$. This means that
+\[\lim_{x\to 0}(-Ap\sin px+Bp\cos px)=Bp\]
+must agree with
+\[\lim_{x\to 0}(-A'(p/2)\sin px/2+B'(p/2)\cos px/2)=B'p/2\]
+so $B'=2B$. So, for example, if $X=\sin(px)$ on $x<0$ then $X=2\sin(px/2)$ on $x>0$.
+
+\begin{exm}
+Suppose that the speed of light is 2 and that we are shining a torch into a very murky fishtank in which the speed of light is only 1. Suppose that the interface between the tank and the outside world is at $x=0$ (the tank being in the region $x<0$). Suppose, moreover, that the light that makes it through into the fishtank is described by the function $\alpha\sin(x+t)$. To see that this solves the wave equation, notice that it equals $\frac{1}{2}\alpha\left(\sin x\cos t+\sin t\cos x\right)$ which is a sum of separated solutions (in the region where the speed of light is 1). To understand physically what it means, notice that at each time $t$ the graph is a sine curve that has been translated to the left by a distance $t$ (e.g. at time 0 its maxima occur at $x=n\pi$; at time $t$ its maxima occur at $x=n\pi-t$). Physically, this corresponds to a {\em left-moving} light wave.
+
+We are going to assume that our solution satisfies the interface condition (continuity and differentiability at $x=0$) and we want to understand what the solution looks like in the $x>0$ region. Writing the solution in the $x<0$ region as
+\[\frac{1}{2}\alpha\left(\sin x\cos t+\sin t\cos x\right)\]
+we can analyse these two terms separately.
+
+The first has $X=\frac{\alpha}{2}\sin x$ in $x<0$ (so $A=0$, $B=\alpha/2$) and therefore in the $x>0$ region we need $A'=0$, $B'=\alpha$, giving $\alpha\sin(x/2)\cos t$ in total.
+
+The second has $X=\frac{\alpha}{2}\cos x$ in $x<0$ (so $A=\alpha/2$, $B=0$) and therefore in the $x>0$ region we need $A'=\alpha/2$, $B'=0$, giving $\frac{\alpha}{2}\cos(x/2)\sin t$ in total.
+
+Adding these gives us
+\[\alpha\sin(x/2)\cos t+\frac{\alpha}{2}\cos(x/2)\sin t\]
+as the solution, which we can rewrite (using trigonometry) as
+\[\frac{3\alpha}{2}\sin((x/2)+t)+\frac{\alpha}{2}\sin((x/2)-t).\]
+This is a superposition of two sine waves. The first one is left-moving as before and has amplitude $3\alpha/2$; this corresponds to the torchlight we are shining into the tank. The second is right-moving and has amplitude $\alpha/2$; this corresponds to torchlight which has been reflected by the tank. Therefore $2/3$ of the incoming light is transmitted, $1/3$ is reflected.
+\end{exm}
+
+\section{Laplace's equation}
+
+Laplace's equation
+\[\ppd{\phi}{x}+\ppd{\phi}{y}=0\]
+describes various interesting physical phenomena. For example, it is satisfied by the electrostatic potential on a two-dimensional surface (coordinates $(x,y)$), or by a steady temperature distribution (independent of time), again on a two-dimensional surface. If we seek separated solutions $\phi(x,y)=X(x)Y(y)$ then we find
+\[X''Y+XY''=0\]
+so
+\[X''/X=-Y''/Y=-\lambda.\]
+This gives
+\[
+X=\begin{cases}
+  A\cos px+B\sin px&\mbox{ if }\lambda=p^2>0\\
+  Ax+B&\mbox{ if }\lambda=0\\
+  A\cosh px+B\sinh px&\mbox{ if }\lambda=-p^2<0,
+\end{cases}
+\]
+and
+\[
+Y=\begin{cases}
+  C\cosh py+D\sinh py&\mbox{ if }\lambda=p^2>0\\
+  Cy+D&\mbox{ if }\lambda=0\\
+  C\cos py+D\sin py&\mbox{ if }\lambda=-p^2<0.
+\end{cases}
+\]
+
+\subsection{The simplest Dirichlet problem}
+
+For simplicity, we will consider first the following situation: we look for a solution defined on the square $\{(x,y)\in [0,L]\times [0,L]\}$ satisfying
+\begin{align*}
+\phi(x,0)&=0&\phi(x,L)&=F(x)\\
+\phi(0,y)&=0&\phi(L,y)=0
+\end{align*}
+for some given function $F(x)$. We will represent this problem by the diagram
+
+\lapl{\phi}{0}{F(x)}{0}{0}{$\phi(x,y)$}{L}
+
+\begin{lma}
+The only separated solutions satisfying the three conditions
+\begin{align*}
+\phi(x,0)&=0&&\\
+\phi(0,y)&=0&\phi(L,y)=0
+\end{align*}
+have the form
+\[D_n\fsin{n}\sinh\left(\frac{n\pi y}{L}\right).\]
+\end{lma}
+\begin{proof}
+The boundary conditions imply $X(0)=X(L)=0$ and $Y(0)=0$. As in Lemma \ref{lma:dirichlet}, the first two imply $X(x)=\fsin{n}$ for some $n\in\ZZ$. In particular, $\lambda=n^2\pi^2/L^2>0$, so
+\[Y(y)=C_n\cosh\left(\frac{n\pi y}{L}\right)+D_n\sinh\left(\frac{n\pi y}{L}\right)\]
+The condition $Y(0)=0$ implies
+\[0=Y(0)=C_n,\]
+so the only possibility is 
+\[D_n\fsin{n}\sinh\left(\frac{n\pi y}{L}\right).\]
+\end{proof}
+
+The Ansatz for a solution to the problem
+
+\lapl{\phi}{0}{F(x)}{0}{0}{$\phi(x,y)$}{L}
+
+is then
+\[\phi(x,y)=\sum_{n=1}^{\infty}D_n\fsin{n}\sinh\left(\frac{n\pi y}{L}\right).\]
+Substituting in the final boundary condition
+\[\phi(x,L)=F(x)\]
+gives
+\[F(x)=\sum_{n=1}^{\infty}D_n\fsin{n}\sinh\left(n\pi\right)\]
+so $D_n\sinh(n\pi)$ is the $n$th Fourier coefficient of $F$.
+
+\begin{exm}\label{exm:dirichl}
+{\bf Solve}
+\lapl{\phi}{0}{2\sin(x)\cos(x)}{0}{0}{$\phi(x,y)$}{\pi}
+In this simple example, the Fourier series of the function $F(x)=2\sin(x)\cos(x)=\sin(2x)$ has only one term, namely $\sin(2x)$. Therefore $D_2\sinh(2\pi)=1$ and $D_2=1/\sinh(2\pi)$, which means
+\[\phi(x,y)=\frac{\sinh(2y)}{\sinh(2\pi)}\sin(nx)\]
+\end{exm}
+
+\subsection{More complicated Dirichlet problems: zero at the corners}
+
+We now want to solve more complicated Dirichlet problems, like
+
+\lapl{\phi}{H(x)}{F(x)}{I(y)}{G(y)}{$\phi(x,y)$}{L}
+
+for given functions $F$, $G$, $H$, $I$. Assume that the {\em corner values}
+\[\phi(0,0),\ \phi(0,L),\ \phi(L,0),\ \phi(L,L)\]
+are all zero. We can consider the four Dirichlet problems separately. The vanishing of corner values means that the new Dirichlet problems all have continuous boundary data (there are no discontinuous jumps at the corners).
+
+\lapl{\phi_1}{0}{F(x)}{0}{0}{$\phi_1(x,y)$}{L}\lapl{\phi_2}{0}{0}{0}{G(y)}{$\phi_2(x,y)$}{L}\lapl{\phi}{H(x)}{0}{0}{0}{$\phi_3(x,y)$}{L}\lapl{\phi}{0}{0}{I(y)}{0}{$\phi_4(x,y)$}{L}
+
+Since the Laplace equation is linear, if we solve these four problems individually and add them up then the result is a solution to the problem with all boundary conditions imposed simultaneously.
+
+What are the revelant Ans\"{a}tze for these new boundary problems? By symmetry, the problems $\phi_1$ and $\phi_2$ are related by reflection along the line $x=y$, in other words by the symmetry which switches the variables $x$ and $y$. Therefore if
+\[\phi_1(x,y)=\sum_{n=1}^{\infty}F_n\fsin{n}\frac{\sinh\left(\frac{n\pi y}{L}\right)}{\sinh(n\pi)}\]
+is a suitable Ansatz for $\phi_1$, then
+\[\phi_2(x,y)=\sum_{n=1}^{\infty}G_n\sin\left(\frac{n\pi y}{L}\right)\frac{\sinh\left(\frac{n\pi x}{L}\right)}{\sinh(n\pi)}\]
+is a suitable Ansatz for $\phi_2$. The coefficients $G_n$ will turn out to be the Fourier coefficients of $G$.
+
+Similarly, the problem for $\phi_3$ is related to the problem for $\phi_1$ by the symmetry given by reflecting in the line $y=L/2$, in other words by the change of variables $(x,y)\mapsto (x,L-y)$. So the Ansatz is
+\[\phi_3(x,y)=\sum_{n=1}^{\infty}H_n\fsin{n}\frac{\sinh\left(\frac{n\pi (L-y)}{L}\right)}{\sinh(n\pi)}\]
+and $H_n$ will be the $n$th Fourier coefficient of $H$.
+
+Finally, the problem for $\phi_4$ is related to the problem for $\phi_2$ by reflecting in the line $x=L/2$, in other words by sending $(x,y)\mapsto (L-x,y)$, hence the Ansatz is
+\[\phi_4(x,y)=\sum_{n=1}^{\infty}I_n\sin\left(\frac{n\pi y}{L}\right)\frac{\sinh\left(\frac{n\pi (L-x)}{L}\right)}{\sinh(n\pi)}\]
+where $I_n$ will be the $n$th Fourier coefficient of $I$.
+
+\begin{exm}
+{\bf Solve}
+
+\lapl{\phi}{0}{2\sin(x)\cos(x)}{\sin(y)}{0}{$\phi(x,y)$}{\pi}
+
+Note that this vanishes at the corners of the square so we can separate it into two problems $\phi=\phi_1+\phi_4$ where $\phi_1$ and $\phi_4$ solve the problems
+
+\lapl{\phi_1}{0}{2\sin(x)\cos(x)}{0}{0}{$\phi_1(x,y)$}{\pi}
+
+\lapl{\phi_4}{0}{0}{\sin(y)}{0}{$\phi_4(x,y)$}{\pi}
+
+The $\phi_1$ problem we have already solved (Example \ref{exm:dirichl}):
+\[\phi_1(x,y)=\sin(2x)\frac{\sinh(2y)}{\sinh(2\pi)}.\]
+The $\phi_4$ problem has Ansatz
+\[\phi_4(x,y)=\sum_{n=1}^{\infty}I_n\sin\left(\frac{n\pi y}{L}\right)\frac{\sinh\left(\frac{n\pi (L-x)}{L}\right)}{\sinh(n\pi)}\]
+(where $L=\pi$) and $I_n$ is supposed to be the $n$th Fourier coefficient of $\sin(y)$, so $I_1=1$ and $I_n=0$ for all $n>1$. Therefore
+\[\phi_4(x,y)=\sin\left(\pi y\right)\frac{\sinh\left(\pi-x\right)}{\sinh(\pi)}.\]
+Hence the solution is
+\[\phi(x,y)=\sin(2x)\frac{\sinh(2y)}{\sinh(2\pi)}+\sin\left(y\right)\frac{\sinh\left(\pi-x\right)}{\sinh(\pi)}.\]
+\end{exm}
+
+\begin{exm}\label{exm:bdryprobl}
+{\bf Solve}
+
+\lapl{\phi}{0}{x^3-\pi^2 x}{0}{\pi y^2-\pi^2 y}{$\phi(x,y)$}{\pi}
+
+Note that this vanishes at the corners of the square so we can separate it into two problems $\phi=\phi_1+\phi_2$ where $\phi_1$ and $\phi_2$ solve the problems
+
+\lapl{\phi_1}{0}{x^3-\pi^2 x}{0}{0}{$\phi_1(x,y)$}{\pi}
+
+\lapl{\phi_2}{0}{0}{0}{\pi y^2-\pi^2 y}{$\phi_2(x,y)$}{\pi}
+
+For the first of these we use the Ansatz
+\[\phi_1(x,y)=\sum_{n=1}^{\infty}F_n\fsin{n}\frac{\sinh\left(\frac{n\pi y}{L}\right)}{\sinh(n\pi)}\]
+where $F_n$ is the Fourier coefficient of $x^3-\pi^2 x$, that is
+\[F_n=\frac{2}{\pi}\int_0^{\pi}(x^3-\pi^2x)\sin(nx)dx=\frac{12(-1)^n}{n^3}.\]
+
+For the second we use the Ansatz
+\[\phi_2(x,y)=\sum_{n=1}^{\infty}G_n\sin\left(\frac{n\pi y}{L}\right)\frac{\sinh\left(\frac{n\pi x}{L}\right)}{\sinh(n\pi)}\]
+where $G_n$ is the Fourier coefficient of $\pi y^2-\pi^2y$, that is
+\[G_n=\frac{2}{\pi}\pi\int_0^{\pi}(y^2-\pi y)\sin(ny)dy=-\frac{4((-1)^{n+1}+1)}{\pi n^3}.\]
+Therefore in total, the solution is
+\[\phi(x,y)=\sum_{n=1}^{\infty}\left(\frac{12(-1)^n}{n^3}\fsin{n}\frac{\sinh\left(\frac{n\pi y}{L}\right)}{\sinh(n\pi)}-\frac{4((-1)^{n+1}+1)}{\pi n^3}\sin\left(\frac{n\pi y}{L}\right)\frac{\sinh\left(\frac{n\pi x}{L}\right)}{\sinh(n\pi)}\right).\]
+\end{exm}
+
+\subsection{More complicated Dirichlet problems: nonzero at the corners}
+
+Finally we want to be able to solve problems like
+
+\lapl{\phi}{H(x)}{F(x)}{I(y)}{G(y)}{$\phi(x,y)$}{L}
+
+for given functions $F$, $G$, $H$, $I$ but where the {\em corner values}
+\[\phi(0,0)=M,\ \phi(0,L)=Q,\ \phi(L,0)=N,\ \phi(L,L)=P\]
+are potentially nonzero. To do this we will reduce to the previous case.
+
+\begin{lma}
+For any four numbers $M,N,P,Q\in\RR$, there exists a solution
+\[\phi_0(x,y)=Axy+Bx+Cy+D\]
+to Laplace's equation which satisfies
+\[\phi_0(0,0)=M,\ \phi_0(0,L)=Q,\ \phi_0(L,0)=N,\ \phi_0(L,L)=P.\]
+\end{lma}
+\begin{proof}
+Any function of the form $\phi_0(x,y)=Axy+Bx+Cy+D$ is a solution to Laplace's equation (substitute it in and check!). There are four unknown constants $A,B,C,D$ and four conditions on the corner values and we can use these to fix the constants. For example:
+\[\phi_0(0,0)=A0^2+B0+C0+D=D\]
+so we need to take $D=M$. Similarly we have
+\[\phi_0(L,0)=BL+D\]
+and $D=M$, so to fit the corner value $\phi_0(L,0)=N$ we need $B=(N-M)/L$. Similarly $C=(P-M)/L$. Finally
+\[\phi_0(L,L)=AL^2+BL+CL+D=AL^2+(N-M)+(P-M)+M\]
+so $\phi_0(L,L)=Q$ means that $Q=AL^2+N+P-M$ so $A=(Q+M-N-P)/L^2$. This fixes $A,B,C,D$ in terms of $M,N,P,Q$.
+\end{proof}
+
+Now to solve
+
+\lapl{\phi}{H(x)}{F(x)}{I(y)}{G(y)}{$\phi(x,y)$}{L}
+
+where the corner values are
+\[\phi(0,0)=M,\ \phi(0,L)=Q,\ \phi(L,0)=N,\ \phi(L,L)=P\]
+we first find $\phi_0$ with the same corner values (using the lemma) and then define
+\[\theta(x,y)=\phi(x,y)-\phi_0(x,y).\]
+This is again a solution to Laplace's equation (by linearity) and satisfies the modified boundary conditions
+
+\lapl{\theta}{\tilde{H}(x)}{\tilde{F}(x)}{\tilde{I}(y)}{\tilde{G}(y)}{$\theta(x,y)$}{L}
+
+where
+\begin{align*}
+\tilde{F}(x)&=F(x)-\phi_0(x,L)\\
+\tilde{G}(y)&=G(x)-\phi_0(L,y)\\
+\tilde{H}(x)&=H(x)-\phi_0(x,0)\\
+\tilde{I}(y)&=I(y)-\phi_0(0,y).
+\end{align*}
+
+Since this now has vanishing corner values, we can solve it as before by splitting into four independent problems $\theta_1,\ldots,\theta_4$ and using our Ans\"{a}tze. Finally the solution $\phi$ is given by
+\[\phi=\phi_0+\theta_1+\theta_2+\theta_3+\theta_4.\]
+
+\begin{exm}
+{\bf Solve Laplace's equation subject to the boundary conditions}
+
+\lapl{\phi}{0}{x^3}{0}{\pi y^2}{$\phi(x,y)$}{\pi}
+
+The corner values are
+\[\phi(0,0)=M=0,\ \phi(0,\pi)=Q=0,\ \phi(\pi,0)=N=0,\ \phi(\pi,\pi)=P=\pi^3.\]
+You can see this just by substituting values for $x$ and $y$ into the boundary conditions, for example, to get $\phi(\pi,\pi)=\pi^3$ you can either do $\phi(\pi,\pi)=\pi(\pi^2)$ (putting $y=\pi$ into the boundary condition $\phi(\pi,y)=\pi y^2$) or $\phi(\pi,\pi)=\pi^3$ (putting $x=\pi$ into the boundary condition $\phi(x,\pi)=x^3$).
+
+Following the proof of the lemma it is easy to see that the function $\phi_0$ with the same corner values as $\phi$ is $\pi xy$. Therefore we need to seek $\theta=\phi-\phi_0=\phi-\pi xy$ which now satisfies the modified boundary conditions
+
+\lapl{\theta}{0}{x^3-\pi^2 x}{0}{\pi y^2-\pi^2 y}{$\theta(x,y)$}{\pi}
+
+which we already solved in Example \ref{exm:bdryprobl}. The solution was
+\[\theta(x,y)=\sum_{n=1}^{\infty}\left(\frac{12(-1)^n}{n^3}\fsin{n}\frac{\sinh\left(\frac{n\pi y}{L}\right)}{\sinh(n\pi)}-\frac{4((-1)^{n+1}+1)}{\pi n^3}\sin\left(\frac{n\pi y}{L}\right)\frac{\sinh\left(\frac{n\pi x}{L}\right)}{\sinh(n\pi)}\right)\]
+so the final solution is
+\[\phi(x,y)=\theta(x,y)+\pi xy\]
+(where $\theta$ is given in the previous equation).
+\end{exm}
+
+\section{Summary}
+
+We have a general strategy for solving certain PDEs using separation of variables:
+
+\begin{itemize}
+\item Separate variables and find the separated solutions.
+\item Determine which separated solutions satisfy the boundary conditions.
+\item Form an Ansatz for the general solution by taking an infinite linear combination of the separated solutions satisfying the boundary conditions.
+\item Choose the coefficients in the Ansatz to fit the initial conditions.
+\end{itemize}
+
+Sometimes this needs to be modified by either adding on a simple solution like $Ax+B$ or $Axy+Bx+Cy+D$  or by breaking up into simpler subproblems. Sometimes the boundary conditions are really interface conditions (like requiring continuity or continuous differentiability at an interface). We have seen a number of examples of how this works in practice; more generally you have to use your imagination!

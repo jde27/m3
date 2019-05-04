@@ -1,0 +1,153 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+
+\title{Methods 3 - Question Sheet 5}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{question}(10 marks for * parts)\\
+Solve the Euler-Lagrange equation for the following constrained functionals:
+\begin{enumerate}[(a)]
+\item * $F(y)=\int_0^{\pi/2}((y')^2+2xyy')dx$ subject to $\int_0^{\pi/2}ydx=K$ and the boundary conditions $y(0)=0=y(\pi/2)$.
+\item * $F(y)=\int_0^1((y')^2+y^2)dx$ subject to $\int_0^1xy=\frac{1}{6}+\frac{1}{e}$ and the boundary conditions $y(0)=0$, $y(1)=\sinh(1)+1/2$.
+\item $F(y)=\int_0^1\sqrt{1+(y')^2}dx$ subject to $\int_0^1\sqrt{y}dx=K$ and the boundary conditions $y(0)=A$, $y(1)=B$ (you need not compute any constants in the solution and may leave the solution in implicit form).
+\item $F(y)=\int_0^{\pi/2}((y')^2-y^2)dx$ subject to $\int_0^{\pi/2}ydx=6-\pi$ and the boundary conditions $y(0)=1=y(\pi/2)$.
+\item $F(y)=\int_a^b(y')^2dx$ subject to $\int_a^b\frac{dx}{y}=K$ (give your solution in implicit form, specifying $x$ in terms of $y$).
+\end{enumerate}
+\end{question}
+
+\begin{answer}
+\begin{enumerate}[(a)]
+\item * The Lagrangian is
+\[(y')^2+2xyy'-\lambda(y-2K/\pi)\]
+which gives the Euler-Lagrange equation
+\[2y''+2xy'+2y=-\lambda+2xy'\]
+or\mks{2}
+\[y''+y=-\lambda/2.\]
+The general solution is $\alpha\sin x+\beta\cos x-\lambda/2$ and the boundary conditions give $y(0)=y(\pi/2)=0$ so $\alpha=\lambda/2=\beta$ and the constraint gives $\alpha+\beta-\lambda\pi/4=K$ so $\lambda=K/(1-\pi/4)$.\mks{3}
+\item * The Lagrangian is
+\[(y')^2+y^2-\lambda(xy-2/\pi)\]
+which gives the Euler-Lagrange equation\mks{2}
+\[2y''=2y-\lambda x\]
+which has general solution
+\[y=\alpha\sinh x+\beta\cosh x+\lambda x/2.\]
+The boundary conditions give
+\[y(0)=\beta=0,\qquad y(1)=\alpha\sinh(1)+\lambda/2=\sinh(1)+1/2.\]
+We have
+\[\int(\alpha x\sinh x+\lambda x^2/2)dx=\frac{\lambda}{6}+\frac{\alpha}{e}\]
+so the solution to these two simultaneous equations for $\alpha$ and $\lambda$ is $\alpha=\lambda=1$. So the final answer is\mks{3}
+\[y(x)=\sinh(x)+x/2.\]
+\item The Beltrami identity holds so we get
+\[\frac{1}{\sqrt{1+(y')^2}}-\lambda(\sqrt{y}-K)=C\]
+for some $C$. This gives
+\[y'=\sqrt{\frac{1}{(C+\lambda\sqrt{y}-\lambda K)^2}-1}\]
+so we have to integrate
+\[\int dx=\int\frac{dy}{\sqrt{\frac{1}{(a+b\sqrt{y})^2}-1}}=\int\frac{(a+b\sqrt{y})dy}{\sqrt{1-(a+b\sqrt{y})^2}}\]
+where for convenience, $a=C-\lambda K$, $b=\lambda$. We do this integral by substituting $a+b\sqrt{y}=\sin\theta$, so
+\[dy=\frac{2}{b}\sqrt{y}\cos\theta d\theta=\frac{2}{b^2}\cos\theta(\sin\theta-a) d\theta\]
+and the integral becomes
+\[\frac{2}{b^2}\int(\sin^2\theta-a\sin\theta)d\theta\]
+which gives
+\[\frac{2}{b^2}(a\cos\theta+(\theta-\sin\theta\cos\theta)/2\]
+or, substituting back, we get
+\[x=\frac{2}{b^2}\left(a\sqrt{1-(a+b\sqrt{y})^2}+\sin^{-1}(a+b\sqrt{y})-\frac{1}{2}(a+b\sqrt{y})\sqrt{1-(a+b\sqrt{y})^2}\right)+\mbox{const.}\]
+Thankfully we can leave it in this form and not worry about constants!
+\item This one turns out to be easier without Beltrami. The Euler-Lagrange equation is
+\[\frac{d}{dx}(2y')=-2y-\lambda\]
+or
+\[y''+y=-\lambda/2.\]
+This has general solution $\alpha\sin x+\beta\cos x-\lambda/2$. The boundary conditions and constraint imply:
+\[y(0)=\beta-\lambda/2=1,\qquad y(\pi/2)=\alpha-\lambda/2=1\]
+and
+\[\int_0^{\pi/2}(\alpha\sin x+\beta\cos x-\lambda/2)dx=\alpha+\beta-\frac{\lambda\pi}{4}=6-\pi\]
+so we have
+\[\lambda=4,\qquad\alpha=\beta=3.\]
+\item Consider the modified functional
+\[\int_a^b((y')^2-\lambda\left(\frac{1}{y}-\frac{K}{b-a}\right)dx.\]
+The Euler-Lagrange equation reduces to Beltrami's identity
+\[(y')^2-\lambda\left(\frac{1}{y}-\frac{K}{b-a}\right)-2(y')^2=C\]
+for some constant $C$. This gives
+\[y'=\sqrt{\frac{K\lambda}{b-a}-C-\frac{\lambda}{y}}.\]
+Let us write $A=K\lambda/(b-a)-C$, so that
+\[\int\frac{\sqrt{y}dy}{\sqrt{Ay-\lambda}}=\int dx.\]
+This integral is very similar to the one which occurred in the brachistochrone problem. It gives
+\[\frac{\lambda}{A^{3/2}}\log\left(\sqrt{A}\sqrt{Ay-\lambda}+A\sqrt{y}\right)+\frac{\sqrt{y}\sqrt{Ay-\lambda}}{A}+B=x.\]
+\end{enumerate}
+\end{answer}
+\newpage
+
+
+\bigskip
+\begin{question}(5 marks)\\
+Suppose that $(x(t),y(t))$ is a vector-valued function of $t$ such that $(x(a),y(a))=(x(b),y(b))=(0,0)$. If $L(t,x,y,\dot{x},\dot{y})$ is a Lagrangian and $F(x,y)=\int_a^bL(t,x,y,\dot{x},\dot{y})dt$ is the corresponding functional, show that $(x(t),y(t))$ is a critical point of $F$ if and only if the equations
+\[\pd{L}{x}=\dd{}{t}\pd{L}{\dot{x}},\quad\pd{L}{y}=\dd{}{t}\pd{L}{\dot{y}}\]
+both hold.
+\end{question}
+
+\begin{answer}
+If we make a variation $x(t)\mapsto x(t)+\delta(t)$, $y(t)\mapsto y(t)+\epsilon(t)$ with $\delta(a)=\delta(b)=\epsilon(a)=\epsilon(b)=0$ then, to first order, the variation in $L$ is
+\[L(t,x+\delta,y+\epsilon,\dot{x}+\dot{\delta},\dot{y}+\dot{\epsilon})-L(t,x,y,\dot{x},\dot{y})=\pd{L}{x}\delta+\pd{L}{y}\epsilon+\pd{L}{\dot{x}}\dot{\delta}+\pd{L}{\dot{y}}\dot{\epsilon}\]
+The corresponding variation in $F(x,y)$ is\mks{2}
+\[d_{(x,y)}F(\delta,\epsilon)=\int_a^b\left(\pd{L}{x}\delta+\pd{L}{y}\epsilon+\pd{L}{\dot{x}}\dot{\delta}+\pd{L}{\dot{y}}\dot{\epsilon}\right)dt\]
+Integrating by parts this gives\mks{1}
+\[\int_a^b\left(\pd{L}{x}-\dd{}{t}\pd{L}{x}\right)\delta dt+\int_a^b\left(\pd{L}{y}-\dd{}{t}\pd{L}{y}\right)\epsilon dt+\left[\pd{L}{\dot{x}}\delta+\pd{L}{\dot{y}}\epsilon\right]_a^b\]
+and the boundary terms vanish because $\delta$ and $\epsilon$ both vanish at $a$ and $b$. Setting $\epsilon=0$ we see that $\displaystyle\int_a^b\left(\pd{L}{x}-\dd{}{t}\pd{L}{\dot{x}}\right)\delta dt=0$ for all $\delta$ (so the integrand must vanish) and setting $\delta=0$ we see, likewise, that $\pd{L}{y}-\dd{}{t}\pd{L}{\dot{y}}=0$.\mks{2}
+\end{answer}
+\newpage
+\bigskip
+
+
+\begin{question}(5 marks)\\
+Let $P$ be a polynomial of even degree 2 or more and consider the functional
+\[F(y)=\int_0^1P(y')dx\]
+for functions $y$ satisfying $y(0)=0$, $y(1)=1$. Find the Euler-Lagrange equation and show that if $y$ is a solution then $y'$ is constant. Deduce that $y(x)=x$.
+
+{\em Hint: When computing the Euler-Lagrange equation, use the chain rule. Your Euler-Lagrange equation should involve the derivative $P'$ of $P$.}
+\end{question}
+
+\begin{answer}
+The Euler-Lagrange equation is $\dd{}{x}\left(P'(y')\right)=0$ so $P'(y')=C$ for some constant $C$.
+
+\mks{2}
+
+Therefore $y'$ is a zero of the polynomial $P'-C$.
+
+\mks{1}
+
+Since polynomials have a finite number of zeros, $y'\equiv A$ for one of the zeros $P'(A)-C=0$, so $y(x)=Ax+B$ (note that since the polynomial has even degree, $P'-C$ has at least one zero). The boundary conditions now imply that $A=1$, $B=0$ (hence $C=P'(1)$) and so $y(x)=x$ is the only solution.
+
+\mks{2}
+\end{answer}
+\newpage
+
+\bigskip
+
+\begin{question}\ \\
+A smooth probability distribution on $\RR$ with second moment $\sigma^2$ is a smooth function $\rho\colon\RR\to[0,\infty)$ satisfying
+\[(\star)\quad \int_{\RR}\rho(x)=1,\qquad (\star\star)\quad\int_{\RR}x^2\rho(x)dx=\sigma^2.\]
+Show that if $\rho$ is a smooth probability distribution maximising the {\em entropy functional}
+\[S(\rho)=-\int_{\RR}\rho(x)\ln(\rho(x))dx\]
+amongst all smooth probability distributions with second moment $\sigma^2$ then
+\[\rho(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{x^2}{2\sigma^2}\right).\]
+{\em Hint: Introduce two Lagrange multipliers: one for $(\star)$ and one for $(\star\star)$. When imposing the constraints $(\star)$ and $(\star\star)$ it may help to remember that $\int_{\RR}e^{-ax^2}dx=\sqrt{\frac{\pi}{a}}$ and $\int_{\RR}x^2e^{-ax^2}dx=\frac{1}{2}\sqrt{\frac{\pi}{a^3}}$.}
+\end{question}
+
+\begin{answer}
+We need to introduce the modified functional with two Lagrange multipliers
+\[\int_{\RR}\left(-\rho\ln\rho-\lambda_1(\rho-\kappa)-\lambda_2(x^2\rho-\kappa)\right)dx\]
+where $\kappa$ is an arbitrary function with $\int_{\RR}\kappa dx=1$ (over a finite interval of length $L$ we could just use $\kappa=1/L$, but this doesn't work for the whole real line!). The Euler-Lagrange equation is
+\[-\ln\rho-1-\lambda_1-\lambda_2x^2=0\]
+because there is no $\rho'$-dependence. This implies
+\[\rho=\exp(-1-\lambda_1)\exp(-\lambda_2x^2)\]
+so this is a normal distribution with mean zero. Let's call $\exp(-1-\lambda_1)=A$. The integral of this distribution over $\RR$ is $A\sqrt{\pi/\lambda_2}$ and the second moment is $\tfrac{1}{2}A\sqrt{\pi/\lambda_2^3}$. This gives $\lambda_2=1/2\sigma^2$ and $A=1/\sigma\sqrt{2\pi}$.
+\end{answer}
+\newpage
+
+
+
+
+\end{document}

@@ -1,0 +1,95 @@
+\usepackage{parskip,amsthm,amsmath,amsfonts,amssymb}
+\usepackage{multicol,cancel}
+\usepackage[shortlabels]{enumitem}
+\usepackage[letterpaper,margin=1in,bottom=0.7in]{geometry}
+\newcommand{\dd}[2]{\dfrac{d #1}{d #2}}
+\newcommand{\ddd}[2]{\dfrac{d^2 #1}{d #2^2}}
+\newcommand{\pd}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\ppd}[2]{\dfrac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\ppdd}[3]{\dfrac{\partial^2 #1}{\partial #2\partial #3}}
+\newcommand{\brf}[2]{\left(\frac{#1}{#2}\right)}
+                       % Bracket-frac, e.g. for (n\pi x/L) in Fourier series
+\newcommand{\fsin}[1]{\sin\brf{#1 \pi x}{L}}
+\newcommand{\fcos}[1]{\cos\brf{#1 \pi x}{L}}
+\newcommand{\fsint}[1]{\sin\brf{#1 \pi t}{L}}
+\newcommand{\fcost}[1]{\cos\brf{#1 \pi t}{L}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\mks}[1]{\begin{flushright}(#1 marks)\end{flushright}}
+
+\usepackage{tikz}
+\newcommand{\lapl}[6]{
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) -- (0,1);
+  \draw (0,1) -- (1,1);
+  \draw (1,1) -- (1,0);
+  \draw (1,0) -- (0,0);
+  \node at (0.5,0.5) {$#6$};
+  \node [below] at (0.5,0) {$#1(x,0)=#2$};
+  \node [above] at (0.5,1) {$#1(x,\pi)=#3$};
+  \node [left] at (0,0.5) {$#1(0,y)=#4$};
+  \node [right] at (1,0.5) {$#1(\pi,y)=#5$};
+\end{tikzpicture}
+}
+
+\newcommand{\onelapl}[6]{
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) -- (0,1);
+  \draw (0,1) -- (1,1);
+  \draw (1,1) -- (1,0);
+  \draw (1,0) -- (0,0);
+  \node at (0.5,0.5) {#6};
+  \node [below] at (0.5,0) {$#1(x,0)=#2$};
+  \node [above] at (0.5,1) {$#1(x,1)=#3$};
+  \node [left] at (0,0.5) {$#1(0,y)=#4$};
+  \node [right] at (1,0.5) {$#1(1,y)=#5$};
+\end{tikzpicture}
+}
+
+
+\newcommand{\mlapl}[6]{
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) -- (0,1);
+  \draw (0,1) -- (1,1);
+  \draw (1,1) -- (1,0);
+  \draw (1,0) -- (0,0);
+  \node at (0.5,0.5) {#1};
+  \node [below] at (0.5,0) {$#6(x,0)=#2$};
+  \node [above] at (0.5,1) {$#6(x,\pi)=#3$};
+  \node [left] at (0,0.5) {$#6(0,y)=#4$};
+  \node [right] at (1,0.5) {$#6(\pi,y)=#5$};
+\end{tikzpicture}
+}
+\newcommand{\laplneu}[6]{
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) -- (0,1);
+  \draw (0,1) -- (1,1);
+  \draw (1,1) -- (1,0);
+  \draw (1,0) -- (0,0);
+  \node at (0.5,0.5) {#6};
+  \node [below] at (0.5,0) {$#1(x,0)=#2$};
+  \node [above] at (0.5,1) {$#1(x,\pi)=#3$};
+  \node [left] at (0,0.5) {$\partial_x#1(0,y)=#4$};
+  \node [right] at (1,0.5) {$\partial_x#1(\pi,y)=#5$};
+\end{tikzpicture}
+}
+
+\theoremstyle{remark}
+\newtheorem{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{question}{Question}
+\newtheorem{answer}{Answer}
+
+
+%%%%%%%%%%%%%%%%%% Add extra space before theorems
+
+\begingroup 
+\makeatletter 
+\@for\theoremstyle:=definition,remark,plain,TheoremNum\do{% 
+\expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{% 
+\addtolength\thm@preskip\parskip 
+}% 
+} 
+\endgroup 
